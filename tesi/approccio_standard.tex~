@@ -1,0 +1,452 @@
+\chapter{Approccio standard per DDE}
+Per approccio standard si intende l'utilizzo dei metodi numerici continui per la risoluzione delle DDE.
+Come si è visto nel capitolo precedente, data una suddivisione 
+$$\Delta= \left \{ t_0, t_1, \dots , t_n , \dots , t_N = t_f \right \}$$
+risolvere una DDE equivale a risolvere $N$ IVP con soluzione continua.
+$$
+\begin{cases}
+ w_{n+1}'(t)= f \left(t, w_{n+1}(t), x(t-\tau(t,w_{n+1}(t))) \right)	\hspace{0.5cm}	t_n \le t \le t_{n+1}	\\
+ w_{n+1}(t_n)=y_n
+\end{cases} \hspace{1.5cm}
+0 \le n \le N-1
+$$
+dove
+$$
+y_n:=y(t_n)	\hspace{2cm}
+x(s):=
+\begin{cases}
+ \phi(s)	\hspace{2.2cm}	s \le t_0			\\
+ w_{i}(s)	\hspace{1cm}	t_{i-1} \le s \le t_i 	
+\end{cases}
+$$
+Daltronde nel momento in cui utilizziamo un metodo numerico con ordine di consistenza $p$ chiediamo che la soluzione $y$ abbia le prime 
+$p$ derivate continue e questo non è vero per le DDE.\\
+Per vederlo è sufficiente riprendere l'esempio 2.1, in questo caso abbiamo una discontinuità già nella derivata prima, infatti $y'(0)^-=0$ 
+mentre $y'(0)^+=-y(-1)=-1$, quindi la derivata prima è discontinua in $0$. Ripetendo lo stesso ragionamento troviamo che $y''(t)=-y'(t-1)$, 
+quindi $y''(1)^-=-1$ mentre $y''(1)^+=1$, in generale si trova che $y^{(k+1)}$ ha una discontinuità in $k$.
+
+\begin{exm}[Ritardo costante]
+In generale la soluzione di una DDE con ritardo costante
+$$
+\begin{cases}
+ y'(t) = f(t,y(t),y(t- \tau))		\hspace{2cm}	t_0 \le t \le t_f \\
+ y(t)=\phi(t)				\hspace{5cm}	t \le t_0
+\end{cases} 
+$$
+può avere le derivate discontinue nei punti $t_0 + k \tau$ al variare di $k \in \mathbb{Z}$;
+ in particolare $y^{(k+1)}$ può evere una discontinuità nel punto $t_0+ k \tau$.\\[0.4cm]
+Pertanto per risolvere una DDE con ritardo costante certamente è necessario scegliere, ai fini della consistenza del metodo, 
+una suddivisione $\Delta$ che contenga i punti $t_0 + k \tau \le t_f$. 
+\end{exm}
+
+\begin{defn}
+ Il punto $\xi$ è una discontinuità di ordine $k$ se per $0 \le s \le k-1$ si ha che $y^{(s)}(\xi)$ esiste e $y^{(k)}$ è lipschitziana 
+e continua in un intorno di $\xi$, mentre $y^{(k+1)}$ è discontinua in $\xi$ 
+\end{defn}
+
+Nelle DDE si verifica il fenomeno della ``propagazione delle discontinuità'' , in particolare se la soluzione ha una discontinuità 
+di ordine $k$ allora ne ha anche una di ordine $k+1$ a causa del ritardo. D'ora in avanti con il termine discontinuità si intenderà 
+discontinuità di grado $k$.
+\vspace{0.5cm} \\
+Pertanto quando si utilizza un metodo consistente di ordine $p$ è necessario includere nella suddivisione $\Delta$ le discontinuità 
+fino all'ordine $p-1$.
+
+\section{Localizzazione delle discontinuità}
+Si consideri una DDE della forma
+$$
+\begin{cases}
+ y'(t) = f(t,y(t),y(t- \tau (t,y(t)))	\hspace{1cm}	t_0 \le t \le t_f \\
+ y(t)=\phi(t)				\hspace{5cm}	t \le t_0
+\end{cases}
+$$
+allora il numero e la collocazione delle discontinuità delle soluzione dipende dal comportamento della funzione
+$$
+\alpha(t) = t - \tau (t,y(t))
+$$
+Questa funzione è chiamata argomento deviato. 
+\vspace{0.5cm} \\
+Si osserva subito che $\alpha(t) \le t$ essendo il ritardo una funzione non negativa. Per esaminare il caso generale, supponiamo 
+$\alpha(t)>t_0$ e che la storia non si incolli alla soluzione in modo liscio, nel senso che in un intorno di $t_0$ la soluzione 
+non è derivabile con continuità, ovvero $\phi'(t_0)^- \ne y'(t_0)=f(t_0,\phi(t_0),\phi(\alpha(t_0)))$. Non è difficile vedere 
+che se le funzioni $f,\phi, \alpha$ sono continue allora $y'$ è continua per $t > t_0$.\\
+Se inoltre queste funzioni sono anche derivabili allora esiste $y''$ per ogni valore $t$ eccetto i punti $\xi$ tali che sono radici 
+semplici dell'equazione $\alpha(t)=t_0$, infatti formalmente
+$$
+y''(t) = \frac{\partial f}{\partial t} \left( t,y(t),y(\alpha(t)) \right) + 
+ \frac{\partial f}{\partial y} \left( t,y(t),y(\alpha(t)) \right) y'(t)+
+ \frac{\partial f}{\partial x} \left( t,y(t),y(\alpha(t)) \right) y'(\alpha(t)) \alpha'(t)
+$$
+quindi si avrà
+\renewcommand\arraystretch{2.5}
+$$
+\begin{array}{lc}
+\displaystyle
+y''(\xi)^+ = \frac{\partial f}{\partial t} \left( \xi,y(\xi),y(\alpha(\xi)) \right) + 
+ \frac{\partial f}{\partial y} \left( \xi,y(\xi),y(\alpha(\xi)) \right) y'(\xi)+
+ \frac{\partial f}{\partial x} \left( \xi,y(\xi),y(\alpha(\xi)) \right) y'(t_0)^+ \alpha'(\xi)
+\\
+\displaystyle
+y''(\xi)^- = \frac{\partial f}{\partial t} \left( \xi,y(\xi),y(\alpha(\xi)) \right) + 
+ \frac{\partial f}{\partial y} \left( \xi,y(\xi),y(\alpha(\xi)) \right) y'(\xi)+
+ \frac{\partial f}{\partial x} \left( \xi,y(\xi),y(\alpha(\xi)) \right) y'(t_0)^- \alpha'(\xi)
+\end{array}
+$$
+\renewcommand\arraystretch{1}
+Dato che $\alpha'(\xi) \ne 0$ ($\xi$ è radice semplice di $\alpha(t)=t_0$) allora $y''(\xi)^+ \ne y''(\xi)^-$ quindi $y''$ ha una discontinuità 
+in $\xi$. Chiamiamo $\xi$ discontinuità primaria di primo livello, per comodità indicizziamo e denotiamo con $\xi_{1,i}$ le discontinuità 
+primarie al primo livello, ovvero le radici semplici di $\alpha(t)=t_0$, ovvero
+$$
+\forall i
+\hspace{1cm}
+\alpha(\xi_{1,i}) = t_0
+\hspace{1cm}
+\mbox{e}
+\hspace{1cm}
+\alpha'(\xi_{1,i}) \ne 0
+$$
+come anticipato prima le discontinuità si propagano a causa del ritardo e non è difficile vedere che le discontinuità primarie 
+al primo livello danno lugo ad eventuali discontinuità di $y'''$ (se esiste), è possibile ripetere lo stesso ragionamento e cercare 
+le radici semplici di $\alpha(t)=\xi_{1,i}$ e verificare con gli stessi conti che $y'''$ è discontinua in tali punti. 
+Chiamiamo le radici semplici di $\alpha(t)=\xi_{1,i}$ discontinuità primarie al secondo livello. \\[0.3cm]
+Si definiscono discontinuità primarie al $k$-esimo 
+livello le radici semplici di $\alpha(t)=\xi_{k-1,i}$ e questi sono punti in cui $y^{(k+1)}$ (se esiste) potrebbe esser discontinua.
+E' chiaro che le discontinuità di ordine $p$ sono incluse nell'insieme delle discontinuità primarie al livello $p$, pertanto 
+la richiesta che si farà sulla suddivisione, se il metodo è consistente di ordine $p$, sarà
+$$
+\xi_{i,j} \in \Delta
+\hspace{1cm}
+\mbox{con}
+\hspace{1cm}
+j \le p-1
+\hspace{0.5cm}
+\mbox{,}
+\hspace{0.5cm}
+\xi_{i,j} \le t_f
+$$
+Daltronde trovare $\xi_{i,j}$ può esser particolarmente difficile, si analizzerà a fondo il caso $\tau=\tau(t)$ e si darà un'idea 
+di come affrontare $\tau=\tau(t,y(t))$.
+\section{Ritardo dipendente dal tempo}
+Si consideri una DDE della forma
+$$
+\begin{cases}
+ y'(t) = f(t,y(t),y(t- \tau (t))	\hspace{2.5cm}	t_0 \le t \le t_f \\
+ y(t)=\phi(t)				\hspace{5cm}	t \le t_0
+\end{cases}
+$$
+In questo caso è possibile risolvere la DDE usando il metodo dei passi come indicato dal seguente algoritmo
+
+\begin{itemize}
+
+\item[1] \textit{Localizzazione delle discontinuità} \vspace{0.5cm}	\\
+	Risolvere
+	    $$
+	    \begin{cases}
+    	    \xi_{k,j} - \tau (\xi_{k,j}) = \xi_{k-1,i}\\
+	    \xi_{0,1}=t_0
+	    \end{cases}
+	    \hspace{2cm}
+	    1 \le i \le p	\hspace{0.5cm} , \hspace{0.5cm}	\xi_{k,j} \le t_f
+	    $$
+	e ordinare le discontinuità in modo da avere
+	  $$
+	  \xi_1	< \dots	< \xi_s
+	  $$
+      mentre  $\xi_0=t_0$, $\xi_{s+1}=t_f$
+\item[2] \textit{Calcolo della soluzione discreta} \vspace{0.5cm}	\\
+	 Risolvere con un metodo discreto con ordine di consistenza $p$
+	  $$
+	  \begin{cases}
+	   z'(t) = f(t,z(t),\phi(t-\tau(t)))	\hspace{1cm}	\xi_0 \le t \le \xi_1	\\
+	   z(\xi_0)=\phi(\xi_0)
+	  \end{cases}
+	  $$
+
+\item[3] \textit{Iterare per $i=1, \dots, s$} \vspace{0.5cm}
+	  \begin{itemize}
+	   \item 
+		Calcolare e memorizzare l'estensione continua $\eta(t)$ in $[\xi_{i-1},\xi_i]$ interpolando la soluzione solo in $ [\xi_{i-1},\xi_i]$
+	  
+	   \item
+		Risolvere con il metodo discreto
+			  $$
+			  \begin{cases}
+			  z'(t) = f(t,z(t),\eta(t-\tau(t)))	\hspace{1cm}	\xi_i \le t \le \xi_{i+1}	\\
+			  z(\xi_i)=\phi(\xi_i)
+			  \end{cases}
+			  $$
+	  \end{itemize}
+\item[4] \textit{Tracciare il grafico di $\eta(t)$ in $[\xi_0,\xi_{s+1}]$}
+
+\end{itemize}
+
+La convergenza del metodo dei passi segue dal seguente teorema
+
+\begin{thm}[Convergenza del metodo dei passi]
+ Sotto le seguenti ipotesi
+  \begin{itemize}
+   \item La suddivisione $\Delta$ contiene le discontinuità presenti in $[t_0,t_f]$  di ordine al più $p$, detontate con $\xi_1, \dots, \xi_s$
+   \item Il metodo numerico è consitente di ordine $p$ ed è 0-stabile
+   \item L'interpolante ha ordine di consistenza $q$
+   \item L'interpolazione avviene in $[t_{n-i_n},t_{n+j_n+1}] \subseteq [\xi_i, \xi_{i+1}]$
+  \end{itemize}
+Allora allora il metodo è convergente con ordine $q' = \min \left \{ p,q+1 \right \}$
+$$
+\max_{1 \le n \le N} \| y(t_n) - y_n \| = O(h^{q'})
+$$
+e anche l'interpolatore converge con lo stesso ordine
+$$
+\max_{t_0 \le t \le t_f} \| y(t) - \eta(t) \| = O(h^{q'})
+$$
+\end{thm}
+
+Per dimostrare il teorema si useranno i seguenti lemmi 
+
+\begin{lemma}
+ Siano $\left \{ y_n^{\alpha} \right \}_{n=0}^N$ e $\left \{ y_n^{\beta} \right \}_{n=0}^N$ le soluzioni numeriche ottenute 
+ con un metodo $0$-stabile dei seguenti IVP
+
+$$
+\begin{array}{cc}
+ \begin{cases}
+    y'(t)=g(t,y(t))	\\
+    y(a)=\alpha
+ \end{cases}
+&
+ \begin{cases}
+    y'(t)=g(t,y(t))	\\
+    y(a)=\beta
+ \end{cases}
+\end{array}
+\hspace{1cm}
+a \le t \le b
+$$
+Esistono due costanti $M$ ed $S$  indipendenti dalla suddivisione $\Delta$ tali che
+\renewcommand\arraystretch{1,5}
+$$
+\begin{array}{lc}
+\displaystyle
+\max_{k \le n \le N} \| y_n^\alpha - y_n^\beta \| \le M \max_{0 \le s \le k-1} \| y_s^\alpha - y_s^\beta \|	\\
+\displaystyle
+\max_{a \le t \le b} \| \eta^\alpha(t) - \eta^\beta(t) \| \le S \max_{0 \le s \le k-1} \| y_s^\alpha - y_s^\beta \|
+\end{array}
+$$
+\renewcommand\arraystretch{1}
+
+
+\end{lemma}
+
+\begin{lemma}
+ Siano $\left \{ y_n \right \}_{n=0}^N$ e $\left \{ z_n \right \}_{n=0}^N$ le soluzioni numeriche ottenute 
+ con un metodo $0$-stabile dei seguenti IVP
+
+$$
+\begin{array}{cc}
+ \begin{cases}
+    y'(t)=f(t,y(t),u(t))	\\
+    y(a)=\alpha
+ \end{cases}
+&
+ \begin{cases}
+    y'(t)=f(t,y(t),v(t))	\\
+    y(a)=\alpha
+ \end{cases}
+\end{array}
+\hspace{1cm}
+a \le t \le b
+$$
+Esistono due costanti $M$ ed $S$  indipendenti dalla suddivisione $\Delta$ ed un $h_0$ tale che se $h_i \le h_0$ allora
+\renewcommand\arraystretch{1,5}
+$$
+\begin{array}{lc}
+\displaystyle
+ \max_{1 \le n \le N} \| y_n - z_n \| \le M \max_{1 \le s \le k-1} \| y_s - z_s \| + M \max_{a \le t \le b} \| u(t)-v(t) \|	\\
+\displaystyle
+ \max_{a \le t \le b} \| \eta(t) - \zeta(t) \| \le S \max_{1 \le s \le k-1} \| y_s - z_s \| + S \max_{a \le t \le b} \| u(t)-v(t) \|
+\end{array}
+$$
+\renewcommand\arraystretch{1}
+\end{lemma}
+
+La dimostrazione di questi lemmi è soltanto tecnica e segue le stesse idee della dimostrazione del teorema 3.2, per 
+i dettagli si veda \cite[lemmi 4.1.3 e 4.1.4]{2}
+
+\begin{proof}[Dimostrazione del teorema 3.9]
+ La tesi si dimostra per induzione sul numero di discontinuità $\xi_i$. \\
+Nell'intervallo $[\xi_0, \xi_1]$ il problema diventa
+	  $$
+	  \begin{cases}
+	   z'(t) = f(t,z(t),\phi(t-\tau(t)))	\hspace{1cm}	\xi_0 \le t \le \xi_1	\\
+	   z(\xi_0)=\phi(\xi_0)
+	  \end{cases}
+	  $$
+su questo intervallo, ponendo $g(t,y(t))=f(t,z(t),\phi(t-\tau(t)))$, la tesi è vera per il teorema 3.2 .	\\
+Supponendo la tesi valida fino a $\xi_i$ allora bisognerà mostrare che è valida anche su $[\xi_i, \xi_{i+1}]$ dove il problema da risolvere è
+$$
+\begin{cases}
+ w'(t) = f (t,w(t),\eta(t-\tau(t)))	\hspace{1cm}	\xi_i \le t \le \xi_{i+1}	\\
+ w(\xi_i)=\eta(\xi_i)
+\end{cases}
+$$
+Si osservi che non è possibile applicare il teorema 3.2 a questo problema dato che $\eta(t)$ è una funzione polinomiale a tratti quindi 
+$\eta(t-\tau(t))$ potrebbe non essere abbastanza regolare, daltronde è possibile applicare il teorema 3.2 al seguente IVP
+\begin{equation}
+\begin{cases}
+ x'(t) = f (t,x(t),y(t-\tau(t)))	\hspace{1cm}	\xi_i \le t \le \xi_{i+1}	\\
+ x(\xi_i)=y(\xi_i)
+\end{cases}
+\end{equation}
+
+ora il termine $y(t-\tau(t))$ è abbastanza regolare, quindi si avrà
+\begin{equation}
+\max_{\xi_i \le t \le \xi_{i+1}} \| y(t) -  \zeta(t) \| = O(h^{q'})
+\end{equation}
+
+Si consideri ora il problema ausiliario
+$$
+\begin{cases}
+ z'(t) = f(t,z(t),\eta(t-\tau(t)))	\hspace{1cm}	\xi_i \le t \le \xi_{i+1}	\\
+ z(\xi_i)=y(\xi_i)
+\end{cases}
+$$
+Dal lemma 3.1 , posto $\rho(t)$ l'interpolatore per il problema ausiliario,  si ha che
+$$
+\max_{\xi_i \le t \le \xi_{i+1}} \| \rho(t) - \eta(t) \| \le \max_{0 \le s \le k-1} \| y_s^\alpha - y_s^\beta \|
+$$
+per ipotesi induttiva
+$$
+\max_{\xi_0 \le t \le \xi_i} \| y(t) - \eta(t) \| = O(h^{q'})
+$$
+quindi dal lemma 3.1 applicato usando il dato inziale segue che
+$$
+\max_{0 \le s \le k-1} \|  y_s^\alpha - y_s^\beta \| \le M \| y(\xi_i) - \eta(\xi_i) \| = O(h^{q'})
+$$
+e quindi
+\begin{equation}
+\max_{\xi_i \le t \le \xi_{i+1}} \| \rho(t) - \eta(t) \| = O(h^{q'}) 
+\end{equation}
+
+A questo punto riprendendo il problema originario (3.2) nell'intervallo $[\xi_i, \xi_{i+1}]$ usando il lemma 3.2 ponendo $u(t)=y(t-\tau(t))$ e 
+$v(t)=\eta(t-\tau(t))$ , scegliendo un passo di discretizzazione abbastanza piccolo
+\renewcommand\arraystretch{1,5}
+$$
+\begin{array}{c lc}
+\displaystyle
+\max_{\xi_i \le t \le \xi_{i+1}} \| \rho(t) - \zeta(t) \|  	& \displaystyle	\le	 S \max_{1 \le s \le k-1} \| y_s - z_s \| 
+									+ S \max_{\xi_i \le t \le \xi_{i+1}} \| y(t-\tau(t)) - \eta(t- \tau(t)) \|
+\\
+								& \displaystyle \le	 S \max_{1 \le s \le k-1} \| y_s - z_s \|
+									+ S \max_{t \le \xi_i} \| y(t) - \eta(t) \|
+\end{array}
+$$
+\renewcommand\arraystretch{1}
+Dato che la costante $S$ dipende solo dalla soluzione del problema $y(t)$ allora usando il lemma 3.2 si ha
+$$
+\max_{\xi_i \le t \le \xi_{i+1}} \| \rho(t) - \zeta(t) \| = O(h^{q'})
+$$
+quindi usando la formula (3.4) si ottiene
+\begin{equation}
+ \max_{\xi_i \le t \le \xi_{i+1}} \| \eta(t) - \zeta(t)	\| = O(h^{q'})
+\end{equation}
+Ora si conclude usando la disuguaglianza triangolare e in sequenza le formule (3.3) e (3.5)
+\renewcommand\arraystretch{1,5}
+$$
+\begin{array}{c lc}
+\displaystyle
+ \max_{\xi_i \le t \le \xi_{i+1}}  \| y(t)- \eta(t) \| 		&	\displaystyle
+									=   \max_{\xi_i \le t \le \xi_{i+1}} 	
+										  \| y(t) - \zeta(t) -\eta(t) + \zeta(t) \| 			\\
+								&	\displaystyle
+									\le  \max_{\xi_i \le t \le \xi_{i+1}} 
+										  \| y(t) - \zeta(t) \| +  
+									      \max_{\xi_i \le t \le \xi_{i+1}}  \| \eta(t) - \zeta(t) \| 	\\
+								&	\displaystyle
+									= O(h^{q'})
+\end{array}
+$$
+\renewcommand\arraystretch{1}
+
+
+\end{proof}
+
+\section{Ritardo dipendente dallo stato}
+Si considerino le DDE della forma
+$$
+\begin{cases}
+ y'(t) = f(t,y(t),y(t- \tau (t,y(t)))	\hspace{2.5cm}	t_0 \le t \le t_f \\
+ y(t)=\phi(t)				\hspace{5.7cm}	t \le t_0
+\end{cases}
+$$
+è possibile utilizzare l'approccio standard anche in questo caso, però è necessario fare una richiesta ulteriore, ovvero sarà 
+necessario che l'interpolazione avvenga anche nell'intervallo corrente, quindi si 
+chiederà che $j_n=0$. Sotto questa ulteriore ipotesi vale il teorema 3.9 \cite[par. 4.3]{2}.
+Osserviamo subito che questo non è comunque soddisfacente e che computazionalmente il problema è decisamente più difficile, infatti 
+ai fini della convergenza è necessario che le discontinuità della soluzione siano punti interni alla griglia $\Delta$ e come mostrato 
+prima per trovare le (eventuali) discontinuità è necessario risolvere
+$$
+\begin{cases}
+\xi_{i+1}-\tau(\xi_{i+1},y(\xi_{i+1}))= \xi_i		\\
+\xi_0=t_0
+\end{cases}
+$$
+Una possibile strategia per localizzare le discontinuità è quella di scegliere una griglia $\Delta$ in modo casuale (ad esempio equispaziata) 
+ risolvere la DDE con l'approccio standard e successivamente risolvere
+$$
+\begin{cases}
+\widehat{\xi}_{i+1}-\tau(\widehat{\xi}_{i+1},\eta(\xi_{i+1}))= \widehat{\xi}_i		\\
+\widehat{\xi}_0=t_0
+\end{cases}
+$$
+E' possibile dimostrare allora $\widehat{\xi_i}$ tende a $\xi_i$ con ordine di accuratezza che dipende dall'ordine dell'interpolatore e 
+dall'ordine della discontinuità $\xi_i$. Quindi successivamente si risolverà nuovamente la DDE utilizzando come griglia $\Delta$ quella 
+delle discontinuità appena calcolate.
+\vspace{0.5cm}\\
+E' possibile raffinare questo metodo per renderlo efficiente, l'idea è quella di `` catturare '' le discontinuità. Come detto all'inizio 
+le discontinuità della soluzione da un certo $t$ in poi sono dovute alla proparazione (tramite il ritardo) di discontinuità presenti 
+prima di $t$ (quindi tutto inizia dal possibile punto di discontinuità nell'incollamento con la storia), pertanto il primo punto di discontinuità 
+è $t_0$ e gli altri sono dovuti alla sua propagazione.\vspace{0.5cm}\\
+Si consideri dunque il problema locale
+\begin{equation}
+ \begin{cases}
+ w_{n+1}'(t)	=	f(t,w_{n+1}(t),x(t-\tau(t,w_{n+1}(t))))		\hspace{1cm}	t_n \le t \le t_{n+1}		\\
+ w_{n+1}(t_n) 	=	 y_n
+\end{cases}
+\end{equation}
+dove
+$$
+x(s)=
+\begin{cases}
+\begin{array}{c lc}
+ \phi(s)		&	\mbox{se}	\hspace{0.5cm}		s \le t_0			\\	
+ \eta(s)		&	\mbox{se}	\hspace{0.5cm}		t_0 \le s \le t_n		\\
+ w_{n+1}(s)		&	\mbox{se}	\hspace{0.5cm}		t_n \le s \le t_{n+1}
+\end{array}
+\end{cases}
+$$
+si assumi che ci sia una discontinuità $\xi$ nell'intervallo $[t_n, t_{n+1}]$ dovuta alla propagazione di una precedente 
+discontinuità $\widehat{\xi_{i}}$ tale che
+$$
+\xi-\tau(\xi,w_{n+1}(\xi))=\widehat{\xi_i}
+$$
+Risolvendo la (3.6) è possibile controllare che l'interpolatore $\eta$ è tale che l'approssimazione dell'argomento deviato 
+$t-\tau(t,\eta(t))$ attraversi o meno $\xi$, ovvero cerchiamo $\xi$ tali che
+$$
+\xi-\tau(\xi,\eta(\xi))=\widehat{\xi_i}
+$$
+Se tali $\xi$ esistono e sono nell'intervallo $ [t_n, t_{n+1} )$ allora si rigetta il passo corrente di discretizzazione e 
+l'interpolatore e si sceglie un nuovo passo di discretizzazione $h_{n+1}^{\mbox{\tiny new}}$ (più piccolo)
+ e si ripete lo stesso ragionamento su  $[t_n, t_n+h_{n+1}^{\mbox{\tiny new}}]$.
+L'algoritmo va avanti fino a che non si trova un intervallo sufficientemente piccolo tale che
+$$
+\xi-\tau(\xi,\eta(\xi))=\widehat{\xi_i}
+$$
+non ha soluzioni in $[t_n, t_n+\bar{h}]$. A questo punto possono succedere due cose: 
+$$
+t_n + \bar{h} -\tau(t_n + \bar{h},\eta(t_n + \bar{h}))=\widehat{\xi_i}
+$$
+e in tal caso si è trovata la discontinuità, oppure la discontinuità si trova dopo $t_n + \bar{h}$, quindi si ripete lo stesso 
+algoritmo su $[t_n + \bar{h},t_{n+1}]$.
+\vspace{1cm}\\
+L'algoritmo appena descritto in genere è molto efficiente nel senso che esperimenti numerici hanno confermato che includendo le 
+approssimazioni delle discontinuità calcolate con questo metodo nella suddivisione $\Delta$ si hanno buoni risultati di convergenza in 
+accordo al teorema 3.9 (esteso). Daltronde è chiaro che l'algoritmo potrebbe avere un costo computazionale troppo alto oppure 
+potrebbe non funzionare nel caso in cui le discontinuità siano troppo vicine.

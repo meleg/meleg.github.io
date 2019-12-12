@@ -1,0 +1,687 @@
+\chapter{Estensione continua di metodi numerici per IVP}
+
+Dato un IVP
+$$
+\begin{cases}
+ y'(t)=g(t,y(t))	\hspace{1cm}	t_0 \le t \le t_f	\\
+ y(t_0)=y_0
+\end{cases}
+$$
+se $g$ è continua e lipschitziana rispetto al secondo argomento allora il problema ammette soluzioni.
+
+\begin{defn}[Metodi numerici per IVP]
+ Data una suddivisione $\Delta= \left \{ t_0, t_1, \dots , t_n , \dots , t_N = t_f \right \}$  
+un metodo numerico a $k$ passi è una successione
+$$
+\begin{array}{c lc}
+y_{n+1} = & \alpha_{n,1} y_n + \dots +\alpha_{n,k} y_{n-k+1} \\
+	  & + h_{n+1} \phi (y_n, \dots , y_{n-k+1})
+\end{array}
+\hspace{1cm}
+0 \le n \le N-1
+$$
+dove $h_{n+1}=t_{n+1}-t_n$ e si suppongono noti i primi $k$ termini $y_0, \dots , y_{k-1}$.
+Inoltre la funzione $\phi$ è lipschitziana.
+\end{defn}
+
+\begin{defn}[Estensione continua]
+Un'estensione continua (o interpolatore) di un metodo numerico è una funzione $\eta(t)$ 
+polinomiale a tratti definita dalle restrizioni su ogni intervallo $[t_n,t_{n+1}]$ di una interpolazione 
+basata sui valori calcolati in un intervallo più amplio possibile $[t_{n-i_n},t_{n+j_n+1}]$ con 
+$i_n,j_n \geq 0$ della forma
+$$
+\begin{array}{c lc}
+\eta(t_n+\theta h_{n+1}) = & \beta_{n,1} (\theta) y_{n+j_n} + \dots + \beta_{n,j_n + i_n + 1} (\theta) y_{n-i_n} \\
+			 & + h_{n+1} \Psi (y_{n+j_n}, \dots , y_{n-i_n}, \theta)
+\end{array}
+\hspace{1cm}	\theta \in [0,1] 
+$$
+dove $\eta(t)$ è continua, quindi
+$$
+\eta(t_n)=y_n	\hspace{1cm}	\mbox{e}	\hspace{1cm} \eta(t_{n+1})=y_{n+1}
+$$
+Inoltre la funzione $\Psi$ è lipschitziana.
+\end{defn}
+
+\begin{defn}[Consistenza di un metodo numerico]
+ Un metodo numerico è consistente di ordine $p$ se per ogni IVP e per ogni suddivisione $\Delta$, 
+ $p \geq 1$ è il più grande intero tale che 
+ $$
+ \| y(t_{n+1}) - \tilde{y}_{n+1}  \| = O(h_{n+1}^{p+1})
+\hspace{1cm}	
+\mbox{per}
+\hspace{1cm}
+0 \le n \le N-1
+ $$
+dove
+$$
+\begin{array}{c lc}
+\tilde{y}_{n+1} = 	&	\alpha_{n,1} y(t_n) + \dots +\alpha_{n,k} y (t_{n-k+1}) \\ 
+			&	+h_{n+1} \phi (y(t_n), \dots , y(t_{n-k+1}))
+\end{array}
+$$
+\end{defn}
+
+\begin{defn}[Consistenza di un'estensione continua]
+Un'estensione continua è consistente di ordine $q$ se per ogni IVP e per ogni suddivisione $\Delta$, 
+$q \geq 1$ è il più grande intero tale che 
+ $$
+\max_{t_n \le t \le t_{n+1}}
+ \| y(t) - \tilde{\eta}(t)  \| = O(h_{n+1}^{q+1})
+\hspace{1cm}	
+\mbox{per}
+\hspace{1cm}
+0 \le n \le N-1
+ $$
+ dove
+$$
+\begin{array}{c lc}
+\tilde{\eta}(t_n+\theta h_{n+1}) =	& \beta_{n,1} (\theta) y(t_{n+j_n}) + \dots + 
+					    \beta_{n,j_n + i_n + 1} (\theta) y(t_{n-i_n})\\
+					& + h_{n+1} \Psi (y(t_{n+j_n}), \dots , y(t_{n-i_n}), \theta)	
+\end{array}
+$$
+\end{defn}
+
+\begin{defn}[Convergenza]
+ Un metodo numerico è convergente di ordine $p$ se per ogni IVP e per ogni suddivisione $\Delta$, 
+ posto $\displaystyle h = \max_{1 \le n \le N} t_n$ vale
+$$
+\max_{1 \le n \le N} \| y(t_n) -  y_n \| = O(h^p)
+$$
+la sua estensione continua è convergente di ordine $q$ se 
+$$
+\max_{t_0 \le t \le t_f} \| y(t) - \eta (t) \| = O(h^q)
+$$
+\end{defn}
+
+\begin{thm}
+ Un metodo numerico ad un passo è convergente di ordine $p$ se e soltanto se è consistente di ordine $p$.
+ Inoltre se tale metodo ammette un interpolatore  con ordine di 
+consistenza $q$ allora l'interpolatore è convergente con ordine $q'=\min \left \{ p,q+1 \right \}$.
+\end{thm}
+\begin{proof}
+ Segue da \cite[par 4.3]{3} e dal teorema  3.2
+\end{proof}
+
+\vspace{0.5cm}
+I metodi a più passi possono esser consistenti ma non convergenti, daltronde aggiungendo 
+delle ipotesi è possibile dare criteri di convergenza come mostra il seguente teorema
+
+\begin{thm}
+Sia 
+$$
+\begin{array}{c lc}
+y_{n+1} =	&	 \alpha_{n,1} y_n + \dots +\alpha_{n,k} y_{n-k+1} \\
+		&	+ h_{n+1} \phi (y_n, \dots , y_{n-k+1})
+\end{array}
+\hspace{1cm}
+0 \le n \le N-1
+$$
+un metodo numerico a $k$ passi convergente di ordine $p$ e sia
+$$
+C_n=
+\begin{pmatrix}
+ \alpha_{n,1}	&	\alpha_{n,2}	&	\dots	&	\alpha_{n,k-1}	&	\alpha_{n,k}	\\
+      1		&		0	&	\dots	&		0	&		0	\\
+      0		&		1	&	\dots	&		0	&		0	\\
+      \vdots	&	\vdots		&	\ddots	&	\vdots		&	\vdots		\\
+      0		&		0	&	\dots	&		1	&		0
+\end{pmatrix}
+$$
+la sua matrice associata allora se
+\begin{itemize}
+ \item esiste una norma $\| \cdot \|_{*}$ tale che $\| C_n \|_{*} \le 1$
+ \item la funzione $g$ (che definisce l'IVP) è di classe $C^p$
+ \item i punti $y_0 \dots , y_{k-1}$ sono una approssimazione di ordine $p$ della soluzione esatta
+\end{itemize}
+allora il metodo è convergente di ordine $p$, inoltre se il metodo numerico ammette un'estensione 
+continua consistente di ordine $q$ allora tale estensione è convergente di ordine 
+$q'=\min \left \{ p , q+1 \right \} $
+\end{thm}
+
+\begin{proof}
+Per ipotesi si ha che
+$$
+y(t_{n+1}) - \tilde{y}_{n+1} = \varepsilon_{n+1}
+\hspace{0.8cm}
+\mbox{con}
+\hspace{0.8cm}
+\| \varepsilon_{n+1} \| = c h_{n+1}^{p+1}
+$$
+posto 
+$$
+\begin{array}{lc}
+\textbf{y}_n=[y_n , y_{n-1} \dots, y_{n-k+1}]^{T}			\\
+\textbf{y}(t_n)=[y(t_n) , y(t_{n-1}) \dots, y(t_{n-k+1})]^{T}
+\end{array}
+$$
+usando la definizione di $y_n$ si ha
+$$
+ \textbf{y}(t_{n+1}) - \textbf{y}_{n+1} = \mathcal{C}_n 
+(\textbf{y}(t_{n}) - \textbf{y}_{n}) + h_{n+1} \Gamma_n + \textbf{E}_{n+1} 
+$$
+dove 
+$$
+\mathcal{C}_n = C_n \otimes I	
+\hspace{1cm}
+\Gamma_n = [\phi(\textbf{y}(t_{n})-\phi(\textbf{y}_{n})), 0 , \dots, 0]^T
+\hspace{1cm}
+\textbf{E}_{n+1} = [\varepsilon_{n+1}, 0 , \dots , 0]
+$$
+Non è difficile dimostrare che se $\| C_n \| \le 1$ allora $\| \mathcal{C}_n \| \le 1$ 
+(ad esempio si può usare il principio di equivalenza delle norme e dimostrarlo con una norma 
+comoda come $\| \cdot \|_{\infty}$)
+, quindi passando alle norme si ha
+$$
+\| \textbf{y}(t_{n+1}) - \textbf{y}_{n+1} \| \le  
+\| \textbf{y}(t_{n}) - \textbf{y}_{n} \| + h_{n+1} \| \Gamma_n \| + \| \textbf{E}_{n+1} \| 
+$$
+sfruttando la lipshitzianità di $\phi$ si ha che esiste $Q > 0$ tale che
+$$
+\| \textbf{y}(t_{n+1}) - \textbf{y}_{n+1} \| \le  (1+hQ)
+\| \textbf{y}(t_{n}) - \textbf{y}_{n} \| + c' h^{p+1}  
+$$
+iterando si arriva a
+$$
+\| \textbf{y}(t_{n+1}) - \textbf{y}_{n+1} \| \le e^{Q(t_f - t_0)} 
+\| \textbf{y}(t_{k-1}) - \textbf{y}_{k-1} \| + \frac{e^{Q(t_f - t_0)}-1}{Q} c' h^p
+$$
+daltronde per ipotesi i primi $k$ punti sono un'approssimazione di ordine $p$, quindi 
+$\| \textbf{y}(t_{k-1}) - \textbf{y}_{k-1} \|=O(h^p)$, 
+pertanto segue la prima parte della tesi. \\[0.3cm]
+Resta da mostrare la convergenza dell'estensione continua, daltronde per ipotesi
+$$
+y(t_n+\theta h_{n+1}) - \tilde{\eta}(t_n + \theta h_{n+1}) = \varepsilon_{n+1}(\theta)
+\hspace{0.8cm}
+\mbox{con}
+\hspace{0.8cm}
+\|  \varepsilon_{n+1}(\theta) \| = O(h_{n+1}^{q+1})
+$$
+quindi
+$$
+\max_{0 \le n \le N-1}	\max_{0 \le \theta \le 1} \| \varepsilon_{n+1}(\theta) \| = O(h^{q+1})
+$$
+Usando come nel caso precedente la lipshitzianità di $\phi$ si conclude
+$$
+\| y(t_n+\theta h_{n+1}) - \eta(t_n + \theta h_{n+1}) \| \le O(h^p) + O(h^{q+1})
+$$
+\end{proof}
+
+\begin{exm}[Interpolazioni cubiche di Hermite]
+Se un metodo numerico è consistente di ordine $p \geq 3$, allora è possibile estendere questo 
+metodo ad un metodo continuo consistente di ordine $3$ usando le interpolazioni 
+cubiche di Hermite, ovvero calcolato 
+$y_{n+1}$ approssimiamo 
+la soluzione in $[t_{n},t_{n+1}]$ con 
+$$
+\eta(t_n+\theta h_{n+1}) =   (1 - \theta) y_n + \theta y_{n+1} + \theta (\theta-1)
+			    [ (1- 2 \theta ) (y_{n+1} - y_n) + (\theta-1)h_n f (y_n,t_n) + \theta h_n f(y_{n+1},t_{n+1}) ] 
+$$
+\end{exm}
+
+
+
+\section{Metodi di Runge-Kutta}
+Si consideri l'IVP
+$$
+\begin{cases}
+ y'(t)=g(t,y(t))		\hspace{2cm}	t_0 \le t \le t_f \\
+ y(t_0)=y_0
+\end{cases}
+$$
+sia $\Delta=\left \{ t_0 , \dots , t_n, \dots t_N = t_f  \right \}$ la suddivisione, allora 
+è possibile dividere il problema in $N$ problemi più piccoli della forma
+$$
+\begin{cases}
+ y_n'(t)=g(t,y_n(t))		\hspace{2cm}	t_n \le t \le t_{n+1} \\
+ y_n(t_n)=y_{n-1}(t_n)
+\end{cases}
+$$
+Quindi la soluzione $y$ sarà l'incollamento delle funzioni $y_n$ e poniamo $y_0(t_0)=$
+
+a questo punto si riformula il problema in forma integrale
+$$
+y(t_{n+1}) =y(t_n) + \int_{t_n}^{t_{n+1}} g(t,y(t)) \ dt
+$$
+per approssimare l'integrale della formula precedente si usa una formula di integrazione numerica, 
+quindi sia $t_{n+1}^i = t_n + c_i h_{n+1}$ una suddivisione dell'intervallo $[t_{n},t_{n+1}]$
+allora
+$$
+\int_{t_n}^{t_{n+1}} g(s,y(s)) \ ds \simeq
+h_{n+1} \sum_{i=1}^{\nu} b_i g (t_{n+1}^i,y(t_{n+1}^i))
+$$
+pertanto
+$$
+y(t_{n+1}) \simeq y(t_n) + h_{n+1} \sum_{i=1}^{\nu} b_i g (t_{n+1}^i,y(t_{n+1}^i))
+$$
+questo rende possibile la costruzione di un metodo numerico ad un passo, infatti troviamo subito
+$$
+y_{n+1} = y_n + h_{n+1} \sum_{i=1}^{\nu} b_i g (t_{n+1}^i,Y_{n+1}^i)
+$$
+dove si è posto $Y_{n+1}^i \simeq y(t_{n+1}^i)$, quindi per calcolare queste approssimazioni 
+è possibile riutilizzare la stessa tecnica con l'integrazione numerica e ottenere
+$$
+Y_{n+1}^i = y_n + h_{n+1} \sum_{j=1}^{\nu} a_{i,j} g(t_{n+1}^j,Y_{n+1}^j)
+\hspace{1cm}
+1 \le i \le \nu
+$$
+in conclusione è possibile esprimere il metodo ad un passo come
+$$
+\begin{cases}
+\displaystyle
+Y_{n+1}^i = y_n + h_{n+1} \sum_{j=1}^{\nu} a_{i,j} g(t_{n+1}^j,Y_{n+1}^j)
+\hspace{1cm}
+1 \le i \le \nu
+\\
+\displaystyle
+y_{n+1} = y_n + h_{n+1} \sum_{i=1}^{\nu} b_i g (t_{n+1}^i,Y_{n+1}^i)
+\end{cases}
+$$
+Questa classe di metodi è nota come metodi di Runge-Kutta a $\nu$ stadi.
+\\[0.5cm]
+Per rappresentare un metodo di Runge-Kutta si userà la seguente tabella
+\begin{center}
+\begin{tabular}{l|lll}
+$c_1$ 		& $a_{1_1}$		& $\dots$		& $a_{1_m}$	 	\\
+$\vdots$	& $\vdots$		& $\ddots$		& $\vdots$		\\
+$c_m$		& $a_{m_1}$		& $\dots$		& $a_{m_m}$		\\
+\hline
+		& $b_1$			& $\dots$		& $b_m$			\\
+\end{tabular}
+\end{center}
+
+\begin{thm}[Ordine massimo]
+ Un metodo di Runge-Kutta a $\nu$ stadi ha ordine $p \le 2 \nu$
+\end{thm}
+
+\begin{proof}
+ Segue dalle argomentazioni di \cite[par 4.3]{3}.
+\end{proof}
+
+
+\subsection{Estensione continua dei metodi di Runge-Kutta}
+L'estensione continua di un metodo di Runge-Kutta è costruita a partire dalla 
+suddivisione dell'intervallo $[t_{n},t_{n+1}]$, quindi ha la forma
+$$
+\eta(t_n + \theta h_{n+1}) = y_n + h_{n+1} \sum_{i=1}^{\nu} b_i(\theta) g(t_{n+1}^i,Y_{n+1}^i)
+\hspace{1cm}
+0 \le \theta \le 1
+$$
+dove $b_i(\theta)$ sono dei polinomi opportuni con grado $\le \delta$ detto grado 
+dell'interpolatore.
+\vspace{1cm} \\
+Affinchè l'interpolatore sia  
+ continuo bisogna chiedere
+$$
+b_i(0)=0	\hspace{1cm}	b_i(1)=1	\hspace{1.5cm}		1 \le i \le \nu
+$$
+Questi sono detti interpolatori di prima classe e analizzeremo soltato questa classe di estensioni 
+dei metodi di Runge-Kutta.
+
+\begin{oss}
+ Dal teorema 3.2 segue che se un metodo di Runge-Kutta è consistente allora è convergente, se inoltre 
+ ammette un'interpolatore consistente allora questo è anche convergente.
+\end{oss}
+
+\begin{thm}
+Se un metodo di Runge-Kutta ammette un interpolatore convergente di ordine 
+$q$ e di grado $\delta \geq q$ 
+allora 
+$$
+\max_{t_0 \le t \le t_f} \| y^{(j)}(t) - \eta^{(j)}(t) \| = O(h^{q-j+1})
+\hspace{1cm}
+1 \le j \le \delta 
+$$
+\end{thm}
+
+\begin{thm}
+Se un metodo di Runge-Kutta ammette un interpolatore convergente di ordine 
+$q$ e di grado $\delta \geq q$ allora esiste un altro interpolatore convergente di 
+ordine $q$ con grado $q$.
+\end{thm}
+\par
+Le dimostrazioni di questi teoremi si trovano su \cite[teo 5.1.5 e 5.1.6]{2}
+\vspace{0.5cm}\\
+Da questi due teoremi segue che è necessario trovare interpolatori con uguale grado e ordine di 
+consistenza, non soltanto per abbassare il costo computazionale di calcolo ma anche perchè avere 
+interpolatori con grado troppo alto può esser pericoloso dato che se l'interpolatore ha 
+ordine $q$ e grado $\delta \geq q+1$ allora può succedere che 
+$$
+\lim_{h \rightarrow 0 } | \eta^{(k)}(t_n + \theta h_{n+1}) | = \infty
+\hspace{1cm}
+q+2 \le k \le \delta
+$$
+Quindi d'ora in avanti si assumerà che l'interpolatore abbia uguale ordine e grado.
+\begin{thm}[Esistenza degli interpolatori di prima classe]
+ Ogni metodo di Runge-Kutta di ordine $p$ ha un interpolatore $\eta(t)$ di ordine (e grado) 
+$q=1, \dots, \lfloor \frac{p+1}{2} \rfloor$
+\end{thm}
+
+\begin{proof}
+Per $1 \le i \le \nu$, siano $b_i(\theta)$ i polinomi che soddisfano
+$$
+ \displaystyle
+ \beta_i(0)=0
+  \hspace{2cm}
+ \displaystyle
+ \int_0^1 \theta^r b_i'(\theta) \ d \theta = b_i c_i^r
+ \hspace{0.5cm} 		0 \le r \le q-1
+$$
+Per $r=0$ la condizione diventa $b_i(1)=b_i$, quindi i polinomi $b_i(\theta)$ definiscono 
+un interpolatore continuo $\eta(t)$, bisogna ora mostrare la convergenza.\\
+Si consideri il seguente sistema
+$$
+\begin{cases}
+  y'(t) = g(t,y (t)) 			\\
+  y(t_n) = y(t_n)			\\
+  w_1'(t)=(t-t_n) g(t,y(t))		\\
+  w_1(t_n)=0				\\
+  \hspace{0.4cm}    \vdots		\\
+  w_{q-1}'(t)=(t-t_n)^{q-1} g(t,y(t))	\\
+  w_{q-1}(t_n)=0
+\end{cases}
+$$
+sia
+$
+(y_{n+1}, \bar{w}_1 , \dots , \bar{w}_{q-1})
+$
+la soluzione numerica del sistema al tempo $t_{n+1}$, allora dalla condizione imposta sui polinomi 
+$b_i(\theta)$ per $r=0$
+
+$$
+y_{n+1}=y_n + h_{n+1} \sum_{i=1}^{\nu} b_i g(t_{n+1}^i,Y_{n+1}^i) = 
+y_n + h_{n+1} \int_0^1 \eta'(t_n + \theta h_{n+1}) \ d \theta
+$$
+mentre per $r=1, \dots , q-1$ abbiamo
+$$
+\bar{w}_r = h_{n+1}^{r+1} \sum_{i=1}^{\nu} b_i c_i^r g(t_{n+1}^i,Y_{n+1}^i) = 
+h_{n+1}^{r+1} \int_0^1 \theta^r \eta'(t_n + \theta h_{n+1}) \ d \theta
+$$
+quindi, dato che
+$$
+\begin{array}{lc}
+\displaystyle
+y(t_{n+1}) = y_n + \int_{t_n}^{t_{n+1}} y(t) \ dt 		= 
+y_n + h_{n+1} \int_0^1 y'(t_n + \theta h_{n+1}) \ dt		\\
+\displaystyle
+w_r(t_{n+1}) = \int_{t_n}^{t_{n+1}} (t-t_n)^r y'(t) \ dt = 
+h_{n+1}^{r+1} \int_0^1 \theta^r y'(t_n + \theta h_{n+1}) \ d \theta
+\end{array}
+$$
+il metodo per ipotesi ha ordine $p$ allora vale che
+\begin{equation}
+\left \| 
+\int_0^1 \theta^r 
+[ y'(t_n + \theta h_{n+1}) - \eta'(t_n + \theta h_{n+1})] \ d \theta
+\right \|
+= O(h_{n+1}^{p-r})
+\hspace{1cm}
+r=0, \dots, q-1 
+\end{equation}
+
+Si consideri l'errore
+$$
+y(t_n + \theta h_{n+1}) - \eta(t_n + \theta h_{n+1}) =
+\sum_{k=1}^p e_k(\theta) h_{n+1}^k + O(h_{n+1}^{p+1})
+$$
+dove $e_k(\theta)$ sono polinomi con $e_k(0)=0$ e
+$$
+\deg e_k(\theta) 
+\begin{cases}
+ \le q	\hspace{1cm}	\mbox{se}	\hspace{1cm}	k \le q		\\
+ \le k	\hspace{1cm}	\mbox{se}	\hspace{1cm}	k > q
+\end{cases}
+$$
+(per verificarlo basta usare l'espansione in serie di Taylor di $y(t)$)	\\
+Derivando si ottiene
+$$
+y'(t_n + \theta h_{n+1}) - \eta'(t_n + \theta h_{n+1}) =
+\sum_{k=1}^p e_k'(\theta) h_{n+1}^{k-1} + O(h_{n+1}^{p})
+$$
+usando la (3.1) si ottiene
+$$
+\int_0^1 \theta^r e_k'(\theta)	\ d \theta = 0
+\hspace{1cm}
+\mbox{per}
+\hspace{1cm}
+r+k \le p
+$$
+Quindi per $r=0, \dots, q-1$ si ha che $e_k'(\theta)$ è un polinomio di grado al più $q-1$ e per tutti i 
+$k \le q$ segue che
+$$
+e_k(\theta) \equiv 0
+\hspace{1cm}
+\mbox{per}
+\hspace{1cm}
+1 \le k \le \tilde{q} = \min \left \{ q, p-q+1 \right \}
+$$
+E quindi l'interpolante ha ordine $\tilde{q}$.
+\vspace{0.4cm}\\
+In conclusione si osserva che $\tilde{q}$ è massimizzato dalla scelta di 
+$q= \lfloor \frac{p+1}{2} \rfloor$ e per ogni $q \le  \lfloor \frac{p+1}{2} \rfloor$ si ha 
+$\tilde{q}=q$
+\end{proof}
+\vspace{0.5cm}
+La seguente tabella mostra quali sono le condizioni necessarie affinchè un interpolatore sia convergente
+\begin{center}
+
+\begin{tabular}{|c|l|}
+  \hline
+  Ordine 		&		 Condizione							\\
+  \hline
+  1			&		$\displaystyle \sum_{i=1}^{\nu} b_i(\theta) = \theta$		\\
+  \hline
+  2			&		$\displaystyle \sum_{i=1}^{\nu} b_i(\theta) c_i =
+								\frac{1}{2} \theta^2 $			\\
+  \hline
+  3			&		$
+					\begin{array}{lc}
+					\displaystyle \sum_{i=1}^{\nu} b_i(\theta)c_i^2 =
+					\frac{1}{3} \theta^3					\\
+					\displaystyle \sum_{i,j=1}^{\nu} b_i(\theta)a_{i,j} c_i =
+					\frac{1}{6} \theta^3
+					\end{array}
+					$								\\
+\hline
+  4			&		$
+					\begin{array}{lc}
+					\displaystyle \sum_{i=1}^{\nu} b_i(\theta)c_i^3 =
+					\frac{1}{4} \theta^4					\\
+					\displaystyle \sum_{i,j=1}^{\nu} b_i(\theta)a_{i,j} c_i c_j =
+					\frac{1}{8} \theta^4					\\
+					\displaystyle \sum_{i,j=1}^{\nu} b_i(\theta)a_{i,j} c_j^2 =
+					\frac{1}{12} \theta^4					\\
+					\displaystyle \sum_{i,j,k=1}^{\nu} b_i(\theta)a_{i,j} a_{j,k} c_k =
+					\frac{1}{24} \theta^4					
+					\end{array}
+					$								\\
+\hline
+\end{tabular} 
+\end{center}
+
+\vspace{0.5cm}
+\begin{thm}
+ Se un metodo di Runge-Kutta ha un interpolatore convergente di ordine (e grado) $q \geq 2$ allora 
+ ne ha anche uno  di ordine (e grado) $\tilde{q} \le q-1$.
+\end{thm}
+
+\begin{proof}
+ Segue facilmente dai risultati precedenti.
+\end{proof}
+
+
+In conclusione si ha che esistono sempre interpolatori di prima classe fino 
+all'ordine $ \lfloor \frac{p+1}{2} \rfloor$.
+
+\subsection{Metodi di collocazione polinomiale}
+Una classe importante di metodi di Runge-Kutta che permette la costruzione immediata degli interpolatori sono i metodi di collocazione polinomiale.
+L'idea alla base di questi metodi è quella di cercare una soluzione polinomiale a tratti, quindi si cerca $\eta(t)$ di grado $\le \nu$ 
+che soddisfi
+
+$$
+\begin{cases}
+  \eta'(t_{n+1}^i) = g(t_{n+1}^i. \eta(t_{n+1}^i))	\hspace{0.4cm}	1 \le i \le \nu		\\
+  \eta(t_n)=y_n
+\end{cases}
+$$
+
+a questo punto è possibile determinare i coefficienti del metodo e l'interpolatore
+$$
+\begin{array}{lc}
+\displaystyle
+ a_{i,j} = \int_0^{c_i}	L_j(\xi) \ d \xi		\hspace{2cm}	i,j = 1, \dots, \nu	\\
+\displaystyle
+ b_i(\theta) = \int_0^{\theta}	L_i(\xi) \ d \xi	\hspace{2cm}	i=1, \dots, \nu
+\end{array}
+$$
+
+dove 
+
+$$
+L_i( \xi ) = \prod_{\mbox{ \tiny $\begin{array}{lc}  k=1	\\  k \ne i \end{array}$ } }^{\nu}	\frac{\xi - c_k}{c_i - c_k}
+$$
+
+\begin{thm}
+ Per ogni scelta di $c_1 , \dots , c_m \in [0,1]$ si ha che il metodo di collocazione polinomiale ha ordine $p \geq \nu$ e l'interpolatore ha ordine 
+$q=\nu$, inoltre come conseguenza del teorema (3.1) segue che l'interpolatore è convergente con ordine 
+$q'= \nu$ (se $p=\nu$) oppure $q'=\nu+1$ (se $p > \nu$).
+\end{thm}
+
+\subsection{Esempi}
+
+
+\begin{exm}[Metodi di Gauss]
+I metodi di Gauss a $\nu$ stadi hanno ordine $p=2 \nu$, gli iterpolatori hanno ordine di consistenza 
+$q=\nu$ e ordine di convergenza $q'= \min \left \{ p , q+1 \right \}$
+
+\begin{itemize}
+ \item $\nu=1$ (punto di mezzo) : $p=2$, $q=1$, $q'=2$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|c}
+$ \frac{1}{2}$	&	$\frac{1}{2}$	\\
+\hline
+		&	$1$		
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{2cm}
+$b_1(\theta)=\theta$
+\end{center}
+
+\item $\nu=2$ (Hammer-Hollingworth): $p=4$,$q=2$,$q'=3$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|cc}
+ $\frac{1}{2} - \frac{\sqrt{3}}{6}$	&	$\frac{1}{4}$				&	$\frac{1}{4} - \frac{\sqrt{3}}{6}$	\\
+ $\frac{1}{2} + \frac{\sqrt{3}}{6}$	&	$\frac{1}{4} + \frac{\sqrt{3}}{6}$	& 	$\frac{1}{4}$				\\
+\hline
+					&	$\frac{1}{2}$				&	$\frac{1}{2}$
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{2cm}
+$
+\renewcommand\arraystretch{1,5}
+\begin{array}{lc}
+ b_1(\theta) = - \frac{\sqrt{3}}{2} \theta \left( \theta - 1 - \frac{\sqrt{3}}{3} \right)	\\
+ b_2(\theta) =   \frac{\sqrt{3}}{2} \theta \left(\theta - 1 + \frac{\sqrt{3}}{3} \right) 
+\end{array}
+\renewcommand\arraystretch{1}
+$
+\end{center}
+\end{itemize}
+\end{exm}
+
+\begin{exm}[Metodi di Radau]
+ I metodi di Radau a $\nu$ stadi hanno ordine $p=2 \nu - 1$, gli iterpolatori hanno ordine di consistenza 
+$q=\nu$ e ordine di convergenza $q'= \min \left \{ p , q+1 \right \}$
+\begin{itemize}
+
+
+\item $\nu=1$ (Eulero) : $p=1$, $q=1$, $q'=1$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|c}
+$1$	&	$1$	\\
+\hline
+		&	$1$		
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{3cm}
+$b_1(\theta)=\theta$
+\end{center}
+
+\item $\nu=2$ (Ehle): $p=3$,$q=2$,$q'=3$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|cc}
+ $\frac{1}{3}$		&	$\frac{5}{12}$		&	$-\frac{1}{12}$		\\
+ $1$			&	$\frac{3}{4}$		&	$\frac{1}{4}$		\\
+\hline
+			&	$\frac{3}{4}$		&	$\frac{1}{4}$
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{3.3cm}
+$
+\renewcommand\arraystretch{1,5}
+\begin{array}{lc}
+ b_1(\theta) = -\frac{3}{4} \theta (\theta - 2)						\\
+ b_2(\theta) = \frac{3}{4} \theta \left( \theta - \frac{2}{3} \right)
+\end{array}
+\renewcommand\arraystretch{1}
+$
+\end{center}
+\end{itemize}
+\end{exm}
+
+\begin{exm}[Metodi di Lobatto]
+ I metodi di Lobatto a $\nu$ stadi hanno ordine $p=2 \nu - 2$, gli iterpolatori hanno ordine di consistenza 
+$q=\nu$ e ordine di convergenza $q'= \min \left \{ p , q+1 \right \}$ 
+
+\begin{itemize}
+ \item $\nu=2$ (trapezi): $p=2$,$q=2$,$q'=2$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|cc}
+ $0$			&	$0$			&	$0$			\\
+ $1$			&	$\frac{1}{2}$		&	$\frac{1}{2}$		\\
+\hline
+			&	$\frac{1}{2}$		&	$\frac{1}{2}$
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{2cm}
+$
+\renewcommand\arraystretch{1,5}
+\begin{array}{lc}
+ b_1(\theta) = -\frac{1}{2} \theta (\theta - 2)						\\
+ b_2(\theta) = \frac{1}{2} \theta^2
+\end{array}
+\renewcommand\arraystretch{1}
+$
+\end{center} 
+
+ \item $\nu=2$ (Ehle): $p=4$,$q=3$,$q'=4$;
+\begin{center}
+\renewcommand\arraystretch{1,5}
+\begin{tabular}{c|ccc}
+ $0$			&	$0$			&	$0$			&		$0$		\\
+ $\frac{1}{2}$		&	$\frac{5}{24}$		&	$\frac{1}{3}$		&	$-\frac{1}{24}$		\\
+ $1$			&	$\frac{1}{6}$		&	$\frac{2}{3}$		&	$\frac{1}{6}$		\\
+\hline
+			&	$\frac{1}{6}$		&	$\frac{2}{3}$		&	$\frac{1}{6}$
+\end{tabular}
+\renewcommand\arraystretch{1}
+\hspace{2cm}
+$
+\renewcommand\arraystretch{1,5}
+\begin{array}{lc}
+ b_1(\theta) = 2 \theta \left( \frac{1}{3} \theta^2 - \frac{3}{4} \theta + \frac{1}{2} \right)						\\
+ b_2(\theta) = -4 \theta^2 \left( \frac{1}{3} \theta - \frac{1}{2} \right)								\\
+ b_3(\theta) = 2 \theta^2 \left( \frac{1}{3} \theta - \frac{1}{4} \right)
+\end{array}
+\renewcommand\arraystretch{1}
+$
+\end{center}  
+
+\end{itemize}
+\end{exm}

@@ -1,0 +1,99 @@
+\tikzset{
+  big arrow/.style={
+    decoration={markings,mark=at position 1 with {\arrow[scale=1.5,#1]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt},
+  big arrow/.default=black}
+
+\begin{tikzpicture}[y=0.80pt,x=0.80pt]
+  \matrix (m) [matrix of math nodes,row sep=1em,column sep=2em,minimum width=2em, 
+%  \matrix (m) [matrix of math nodes,row sep=0em,column sep=0em,minimum width=2em, 
+%style={nodes={inner sep=0,minimum height=2cm, draw}},
+style={nodes={inner sep=0,circle, draw}},
+%row 1/.style={nodes={inner sep=0,draw,solid}},
+column 6/.style={nodes={inner sep=0,draw,solid}},
+column 8/.style={nodes={inner sep=0,draw,solid}},
+]
+  {
+     v_{00}& v_{01} & v_{02} & v_{03} &  \\ 
+                & v_{11} & v_{12} & v_{13}  & \\ 
+                &            & v_{22} & v_{23}      & \\ 
+                &            &                & v_{33}      &  \\ 
+               &            &                &                     & \\ };
+%  \node (aa) at (m-2-2) { };
+%  \draw (m-1-1) -- (m-1-2);
+  %\draw[dashed] (m-1-1) -- (m-2-2);
+  
+  %\draw (m-1-2) -- (m-1-3);
+ % \draw[dashed] (m-1-2) -- (m-2-3);
+ % \draw[dashed] (m-2-2) -- (m-3-3);
+ % \draw[dashed](m-2-2) -- (m-2-3);
+ % \draw (m-2-2) -- (m-1-3);
+ 
+ % \draw (m-1-3) -- (m-1-4);
+ % \draw[dashed] (m-1-3) -- (m-2-4);
+ % \draw[dashed] (m-2-3) -- (m-3-4);
+ % \draw[dashed] (m-2-3) -- (m-2-4);
+ % \draw[dashed] (m-3-3) -- (m-4-4);
+ % \draw[dashed] (m-3-3) -- (m-3-4);
+ %  \draw (m-2-3) -- (m-1-4);
+ % \draw (m-3-3) -- (m-1-4);
+\pause
+\matrix (y) [
+matrix of math nodes,
+row sep=1em,column sep=2em,minimum width=2em,anchor=north west,
+style={nodes={inner sep=0,circle,draw}},
+] at ($(m.north east)+(0.5,0)$) {
+y_0 &\\ 
+ y_1 \\ 
+ y_2 \\ 
+ y_3 \\ 
+ y_4 \\ 
+};
+%% y-computation
+
+   \draw[dashed,big arrow] (m-1-4) -- (y-2-1);
+   \draw[dashed,big arrow] (m-2-4) -- (y-3-1);
+   \draw[dashed,big arrow] (m-3-4) -- (y-4-1);
+   \draw[dashed,big arrow] (m-4-4) -- (y-5-1);
+   \draw[big arrow] (y-2-1) to [bend right] (y-1-1);
+   \draw[big arrow] (y-3-1) to [bend right] (y-1-1);
+   \draw[big arrow] (y-4-1) to [bend right] (y-1-1);
+   \draw[big arrow] (y-5-1) to [bend right] (y-1-1);
+ 
+\pause
+\matrix (vp) [
+matrix of math nodes,
+row sep=1em,column sep=2em,minimum width=2em,anchor=north west,
+style={nodes={inner sep=0,circle,draw}},
+] at ($(y.north east)+(0.5,0)$) {
+v_{04} \\ 
+ v_{14} \\ 
+ v_{24} \\ 
+ v_{34} \\ 
+ v_{44} \\ 
+};
+ 
+%% v computation
+  \draw[dashed,big arrow] (m-1-1) to [bend left=20] (vp-1-1);
+  \draw[dashed,big arrow] (m-1-2) to [bend left=20] (vp-1-1);
+  \draw[dashed,big arrow] (m-1-3) to [bend left=20] (vp-1-1);
+  \draw[dashed,big arrow] (m-1-4) to [bend left=20] (vp-1-1);
+  \draw[dashed,big arrow] (y-1-1) to [bend left=20] (vp-1-1);
+
+  \draw[dashed,big arrow] (m-2-2) to [bend left=20] (vp-2-1);
+  \draw[dashed,big arrow] (m-2-3) to [bend left=20] (vp-2-1);
+  \draw[dashed,big arrow] (m-2-4) to [bend left=20] (vp-2-1);
+  \draw[dashed,big arrow] (y-2-1) to [bend left=20] (vp-2-1);
+
+  \draw[dashed,big arrow] (m-3-3) to [bend left=20] (vp-3-1);
+  \draw[dashed,big arrow] (m-3-4) to [bend left=20] (vp-3-1);
+  \draw[dashed,big arrow] (y-3-1) to [bend left=20] (vp-3-1);
+
+  \draw[dashed,big arrow] (m-4-4) to [bend left=20] (vp-4-1);
+  \draw[dashed,big arrow] (y-4-1) to [bend left=20] (vp-4-1);
+%  \draw [-to,shorten >=-1pt,dashed,->,big arrow] (y-5-1) to [bend left=20] (vp-5-1);
+  \draw[dashed,big arrow] (y-5-1) to [bend left=20] (vp-5-1);
+
+
+\end{tikzpicture}

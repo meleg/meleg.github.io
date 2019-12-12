@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.06pt}
+\select@language {italian}
+\beamer@sectionintoc {1}{Presentazione}{2}{0}{1}
+\beamer@sectionintoc {2}{Introduzione}{11}{0}{2}
+\beamer@sectionintoc {3}{Estensione alle misure $H^h$}{41}{0}{3}
+\beamer@sectionintoc {4}{Insiemi di Furstenberg generalizzati}{70}{0}{4}

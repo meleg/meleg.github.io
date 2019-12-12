@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Sample User Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  
+  <body>
+    <p>This is a personal web page.
+    <a href="http://www.kth.se/web/disclaimer.html">More
+    information</a>.</p>
+    
+    <p xml:lang="sv">Detta är en personlig webbsida.
+    <a href="http://www.kth.se/web/disclaimer.html">Mer
+    information</a>.</p>
+    
+    <h1>Sample User Page</h1>
+    
+    <p>This page is reachable at 
+    <a href="http://people.kth.se/~gmele/">this address</a>.</p>
+    
+    <p xml:lang="sv">Denna sida är nåbar på 
+    <a href="http://people.kth.se/~gmele/">denna adress</a>.</p>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+\select@language {italian}
+\contentsline {chapter}{\numberline {1}Introduzione}{3}
+\contentsline {section}{\numberline {1.1}Presentazione del problema}{3}
+\contentsline {section}{\numberline {1.2}Equazione logistica}{3}
+\contentsline {chapter}{\numberline {2}Risoluzione delle DDE}{7}
+\contentsline {section}{\numberline {2.1}Metodo di Bellman}{7}
+\contentsline {section}{\numberline {2.2}Metodo dei passi}{8}
+\contentsline {subsection}{\numberline {2.2.1}Ritardo costante}{8}
+\contentsline {subsection}{\numberline {2.2.2}Ritardo variabile}{10}
+\contentsline {subsection}{\numberline {2.2.3}Criterio per la scelta della suddivisione}{11}
+\contentsline {chapter}{\numberline {3}Estensione continua di metodi numerici per IVP}{13}
+\contentsline {section}{\numberline {3.1}Metodi di Runge-Kutta}{16}
+\contentsline {subsection}{\numberline {3.1.1}Estensione continua dei metodi di Runge-Kutta}{17}
+\contentsline {subsection}{\numberline {3.1.2}Metodi di collocazione polinomiale}{19}
+\contentsline {subsection}{\numberline {3.1.3}Esempi}{20}
+\contentsline {chapter}{\numberline {4}Approccio standard per DDE}{23}
+\contentsline {section}{\numberline {4.1}Localizzazione delle discontinuit\IeC {\`a}}{24}
+\contentsline {section}{\numberline {4.2}Ritardo dipendente dal tempo}{25}
+\contentsline {section}{\numberline {4.3}Ritardo dipendente dallo stato}{28}
+\contentsline {chapter}{\numberline {5}Implementazione in matlab}{31}
+\contentsline {section}{\numberline {5.1}Codice}{32}
+\contentsline {section}{\numberline {5.2}Esperimenti numerici}{37}
+\contentsline {chapter}{Conclusioni ed ulteriori applicazioni}{41}
+\contentsline {chapter}{Ringraziamenti}{45}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>Webpage of Giampaolo Mele</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style> </head>
+  <body class="w3-light-grey">
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+        <!-- Left Column -->
+        <div class="w3-third">
+          <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container"> <img src="avatar.jpg" style="width:100%"
+                alt="Avatar">
+              <div class="w3-display-topleft w3-container w3-text-black">
+                <h2>Giampaolo Mele</h2>
+              </div>
+            </div>
+            <div class="w3-container">
+              <p>PhD student. Supervisor: <a href="https://people.kth.se/%7Eeliasj/">Elias
+                  Jarlebring</a></p>
+              <p>KTH Royal Institute of Technology, Stockholm</p>
+              <p>room 6685, floor 4, Lindstedtsvägen 25, 100 44 Stockholm Sweden
+                Room 6685</p>
+              <p>gmele [at] kth.se</p>
+            </div>
+          </div>
+          <br>
+          <div class="w3-container w3-card-2 w3-white">
+            <h2 class="w3-text-grey w3-padding-16">Education</h2>
+            <div class="w3-container">
+              <h6 class="w3-opacity"><b>KTH, Royal Institute of Technology,
+                  Stockholm</b></h6>
+              <h6 class="w3-text-teal">2014–present: PhD</h6>
+              <hr> </div>
+            <div class="w3-container">
+              <h6 class="w3-opacity"><b>Università di Pisa, Pisa </b></h6>
+              <h6 class="w3-text-teal">2011–2014: Master Degree</h6>
+              <hr> </div>
+            <div class="w3-container">
+              <h6 class="w3-opacity"><b>Università di Pisa, Pisa </b></h6>
+              <h6 class="w3-text-teal">2008–2011: Bachelor’s degree</h6>
+            </div>
+          </div>
+          <br>
+          <div class="w3-container w3-card-2 w3-white">
+            <h5 class="w3-opacity"><b>Links</b></h5>
+            <p><a href="https://scholar.google.se/citations?user=npRuk1YAAAAJ&amp;hl=en&amp;oi=sra">
+                Google scholar profile </a><br>
+              <a href="http://orcid.org/0000-0002-6990-445X">ORCID </a><br>
+              <a href="https://arxiv.org/a/mele_g_2.html">Arxiv </a><br>
+              Teaching<br>
+              Old page</p>
+          </div>
+          <br>
+          <!-- End Left Column --> </div>
+        <!-- Right Column -->
+        <div class="w3-twothird">
+          <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16">Research</h2>
+            <p>My research area is numerical linear algebra. In particular: </p>
+            <ul>
+              <li>Nonlinear eigenvalue problem</li>
+              <li>Preconditioning</li>
+              <li>Matrix equations</li>
+              <li>Matrix functions</li>
+            </ul>
+            <p></p>
+            <div class="w3-container">
+              <hr>
+              <h5 class="w3-opacity"><b>Papers</b></h5>
+              <p> G. Mele and <a href="https://people.kth.se/%7Eeliasj/">E.
+                  Jarlebring</a> <br>
+                <h7 class="w3-text-teal"> On restarting the tensor infinite
+                  Arnoldi method <br>
+                </h7> BIT numerical mathematics:1-30, 2017 <br>
+                <h7 class="w3-opacity"> [ <a href="https://link.springer.com/article/10.1007/s10543-017-0671-z">paper</a>
+                  ] [ <a href="https://arxiv.org/abs/1606.08595">preprint</a> ]
+                </h7> </p>
+              <p> </p>
+              <p> <a href="https://people.kth.se/%7Eeliasj/">E. Jarlebring</a>,
+                G. Mele, <a href="https://www.nada.kth.se/%7Eolofr/">O. Runborg</a>
+                <br>
+                <h7 class="w3-text-teal"> The waveguide eigenvalue problem and
+                  the tensor infinite Arnoldi method <br>
+                </h7> SIAM J. Sci. Comput., 39:A1062-A1088, 2017 <br>
+                <h7 class="w3-opacity"> [ <a href="http://epubs.siam.org/doi/abs/10.1137/15M1044667">paper</a>
+                  ] [ <a href="https://arxiv.org/abs/1503.02096">preprint</a> ]
+                  [ software ] </h7> </p>
+              <p> </p>
+              <p> <a href="http://people.kth.se/%7Eeringh/"></a><a href="http://people.kth.se/%7Eeringh/">E.
+                  Ringh</a>, G. Mele, <a href="https://people.kth.se/%7Eeliasj/">E.
+                  Jarlebring</a> and <a href="https://people.kth.se/%7Ejohan79/">J.
+                  Karlsson</a> <br>
+                <h7 class="w3-text-teal"> Sylvester-based preconditioning for
+                  the waveguide eigenvalue problem <br>
+                </h7> Linear Algebra Appl., accepted for publication, 2017 <br>
+                <h7 class="w3-opacity"> [ <a href="http://www.sciencedirect.com/science/article/pii/S0024379517303907">paper</a>
+                  ] [ <a href="https://arxiv.org/abs/1610.06784">preprint</a> ]
+                  [ <a href="https://people.kth.se/%7Eeringh/software/wep/">software</a>
+                  ] </h7> </p>
+              <p> </p>
+              <hr>
+              <h5 class="w3-opacity"><b>Preprints and submitted manuscripts</b></h5>
+              <p> <a href="https://people.kth.se/%7Eeliasj/">E. Jarlebring</a>,
+                G. Mele, <a href="https://sites.google.com/site/palittadavide/">D.
+                  Palitta</a>, <a href="http://people.kth.se/%7Eeringh/"></a><a
+                  href="http://people.kth.se/%7Eeringh/">E. Ringh</a> <br>
+                <h7 class="w3-text-teal"> Krylov methods for low-rank commuting
+                  generalized Sylvester equations, 2017 <br>
+                </h7> <h7 class="w3-opacity"> [ <a href="https://arxiv.org/abs/1704.02167">preprint</a>
+                  ] [ <a href="https://sites.google.com/site/palittadavide/home/software">software</a>
+                  ] </h7> </p>
+              <p> </p>
+              <p> <a href="https://people.kth.se/%7Eeliasj/">E. Jarlebring</a>,
+                <a href="https://people.kth.se/%7Eakoskela/">A. Koskela</a>, G.
+                Mele <br>
+                <h7 class="w3-text-teal"> Disguised and new Quasi-Newton methods
+                  for nonlinear eigenvalue problems, 2017 <br>
+                </h7> <h7 class="w3-opacity"> [ <a href="https://arxiv.org/abs/1702.08492">preprint</a>
+                  ] [ <a href="https://people.kth.se/%7Eeliasj/src/qnewton/">software</a>
+                  ] </h7> </p>
+              <p> </p>
+              <hr>
+              <h5 class="w3-opacity"><b> Theses </b></h5>
+              <p> G. Mele, Scientific advisor: <a href="http://pagine.dm.unipi.it/bini/">D.A.
+                  Bini</a> <br>
+                <h7 class="w3-text-teal"> Rational Krylov methods for linear and
+                  nonlinear eigenvalue problems, 2014 <br>
+                </h7> <h7 class="w3-opacity"> [ <a href="https://etd.adm.unipi.it/t/etd-02172014-111143/">download</a>
+                  ] </h7> </p>
+              <p> </p>
+            </div>
+          </div>
+          <br>
+          <div class="w3-container w3-card-2 w3-white">
+            <h5 class="w3-opacity"><b>Languages</b></h5>
+            <p>Italian: mother tongue <br>
+              English: full professional proficiency <br>
+              Swedish: upper intermediate</p>
+          </div>
+          <!-- End Right Column --> </div>
+        <!-- End Grid --> </div>
+      <!-- End Page Container --> </div>
+    <footer class="w3-container w3-teal w3-center w3-margin-top">
+      <p>Find me on social media.</p>
+      <a href="https://twitter.com/giampaolo_mele"><i class="fa fa-twitter w3-hover-opacity"></i></a>
+      <a href="https://www.facebook.com/giampaolo.mele"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+      <a href="https://www.instagram.com/giampaolomele/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
+  </body>
+</html>

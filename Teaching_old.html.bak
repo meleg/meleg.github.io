@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width">
+    <title>Teaching</title>
+  </head>
+  <body style="color: rgb(0, 0, 0); background-color: rgb(188, 191, 223);" alink="#000099"
+    link="#000099" vlink="#990099">
+    <div style="text-align: left; margin-left: 18px; width: 1042px;">&nbsp;&nbsp;&nbsp;
+      <br> </div>
+    <div style="text-align: left;">
+      <div style="margin-left: 40px; text-align: left; margin-top: 0px; height: 622px; text-indent: 0%; line-height: normal;"><big><big><big>Now<br>
+            </big></big></big><br>
+        <h1 class="withSecondaryTitle"><a style="font-size: smaller;" href="https://www.kth.se/social/course/SF1544/"><span
+              style="font-weight: normal;">Numerical Methods, Basic Course IV
+              (SF1544)</span></a></h1>
+        <p>I am teach assistant in this course. I will do the exercise sessions
+          (övning) and I will be <br>
+          lab assistant. If you have questions about exercises or you need help
+          with the labs, write me <br>
+          an email.&nbsp;&nbsp; </p>
+        <p><a href="SF1544_2016_2017/ovning1.pdf">Övning 1<span style="color: black;"></span></a>
+          <a href="SF1544_2016_2017/ovning2.pdf">Övning 2</a>&nbsp; <a href="SF1544_2016_2017/ovning3.pdf">Önving
+            3</a>&nbsp; <a href="SF1544_2016_2017/ovning4.pdf">Övning 4</a>&nbsp;
+          <a href="SF1544_2016_2017/ovning5.pdf">Övning 5</a>&nbsp; <a href="SF1544_2016_2017/ovning6.pdf">Övning
+            6</a><a href="SF1544_2016_2017/ovning5.pdf"> </a></p>
+        <big><big><big> 2016</big></big></big>
+        <h1 class="withSecondaryTitle"><span style="font-weight: normal;"><a href="https://www.kth.se/social/course/SF2521/">
+            </a><a href="https://www.kth.se/social/course/SF2521/"><big><big style="font-size: x-large;">Numerical
+                  solutions for partial differential equations (SF2521)</big></big></a></span></h1>
+        I am teach assistant in this course and I will correct the homework. <br>
+        If you need help with the homework write me an email and we can meet and
+        discuss.
+        <h1 class="withSecondaryTitle"><span style="font-weight: normal;"><a style="font-size: x-large;"
+              href="https://www.kth.se/social/course/SF1511/">Numerical Methods
+              and Basic Programming (SF1511)</a></span></h1>
+        <span style="font-weight: normal; font-size: large;">I am teach
+          assistant in this course. I will do the exercise sessions (övning) and
+          I will be lab assistant. If you have questions about exercises or you
+          need help with the labs, write me an email. </span><br>
+        <big><big><big style="font-size: large; line-height: normal;"><br>
+            </big></big></big><big><big><big>2015</big></big></big><br>
+        <br>
+        <a href="https://www.kth.se/social/course/SF1545/"><big><big>Numerical
+              methods, Basic course (SF1545)</big></big></a><br>
+        <br>
+        I am teach assistant in this course. I will do the exercise sessions
+        (övning) and I will be <br>
+        lab assistant. If you have questions about exercises or you need help
+        with the labs, write me <br>
+        an email. <br>
+        <br>
+        <span style="font-weight: bold;"> -&nbsp; Programs that I showed in the
+          övening of 08/09/2015:<br>
+          &nbsp;</span><a href="SF1545_2015/%C3%B6vning1/newton.zip">Newton
+          method</a> and <a href="SF1545_2015/%C3%B6vning1/bisection.zip">bisection
+          method</a><br>
+        <br>
+        <a href="https://www.kth.se/social/course/SF2521/"><big><big>Numerical
+              solutions for partial differential equations (SF2521)</big></big></a><br>
+        <br>
+        I am teach assistant in this course and I will correct the homework. <br>
+        If you need help with the homework write me an email and we can meet and
+        discuss.<br>
+        <span style="font-weight: bold;"></span><br>
+        <a href="http://www.kth.se/student/kurser/kurs/SF1547"><big><big>Numerical
+              methods, Basic course (SF1547)</big></big></a><br>
+        <br>
+        I am lab assistant in this course. <br>
+        If you need help, write me an email and we can meet and discuss.<br>
+        <span style="font-weight: bold;"><br>
+        </span><big><big><big>2014</big></big></big><span style="font-weight: bold;"><br>
+          <br>
+        </span><span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><a
+          href="https://www.kth.se/social/course/SF1511/"><big><big>Numerical
+              Methods and Basic Programming (SF1511)</big></big></a><span style="font-weight: bold;"><br>
+          <br>
+          -&nbsp; Programs that I showed in the övening of 27/11/2014: <br>
+        </span>The exercises are taken from the book <span style="font-style: italic;">MATLAB
+          Programming for Engineers </span>of Chapman<span style="font-weight: bold;"><br>
+        </span><a href="SF1511/ex3_3.m">EX 3.3</a><span style="font-weight: bold;">,
+        </span><a href="SF1511/ex4_7.m">EX 4.7</a>, <a href="SF1511/ex4_8a.m">EX
+          4.8a</a> and <a href="SF1511/ex4_8b.m">EX 4.8b</a><br>
+        <span style="font-weight: bold;"> </span><a href="SF1511/fib.m">Function
+          that compute Fibonacci numbers</a><br>
+        <a href="SF1511/find_max_fun.m">(matlab) function that compute the
+          maximum of a function in an interval [a b] </a><br>
+        The function which you want to compute the maximum must be in a file
+        like <a href="SF1511/f.m">this one</a>.<br>
+        Try to run for example [ f_max,x_max ] = find_max_fun( @f, 0,pi, 1, 100
+        )<br>
+        Try to modify to compute the minimum instead.<br>
+        <br>
+        <span style="font-weight: bold;"> -&nbsp; Programs that I showed in the
+          övening of 04/11/2014: </span><br>
+        The exercises are taken from the book <span style="font-style: italic;">MATLAB
+          Programming for Engineers </span>of Chapman<span style="font-weight: bold;"><br>
+        </span><a href="SF1511/cross_product.m">EX 5.18</a> (function that
+        computes the cross product)<br>
+        <a href="SF1511/gravitational_force.m">EX 5.31</a> (function that
+        computes the gravitational force)<br>
+        I did also the exercises 6.1, 6.2, 6.3, taken from the book<span style="font-style: italic;">:<br>
+          Exempelsamling i numeriska metoder av Lennart Edsberg, Gerd Eriksson
+          och Bengt Lindberg<br>
+        </span><span style="font-weight: bold;"> </span>I used this function
+        for the <a href="SF1511/trap_rule.m">trapezoidal rule</a> <br>
+        (in one exercise I also modified it)<br>
+        <br>
+        <a href="http://www.math.kth.se/na/SF1545/numi14/"><big><big>Numerical
+              Methods, Basic Course (SF1545)</big></big></a><span style="font-weight: bold;"><br>
+          <br>
+          -&nbsp; Programs that I showed in the övening of 13/11/2014: <br>
+        </span><a href="SF1545/ENM_ex_7_10.m">ENM exercise number 7.10</a><span
+          style="font-weight: bold;"><br>
+        </span><a href="SF1545/ENM_ex_6_2.m">ENM exercise number 6.2</a><span style="font-weight: bold;"></span><br>
+      </div>
+    </div>
+  </body>
+</html>

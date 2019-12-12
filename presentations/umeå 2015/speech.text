@@ -1,0 +1,38 @@
+Slide 0
+Here is the outline: I am going to describe the waveguide eigenvalue problem, describe the main idea behind the tensor infinite Arnoldi algorithm and show how this algorithm can be used to solve the waveguide eigenvalue problem.
+
+Slide 1
+Lets consider the Helmholtz equation. In our settings the wavenumber is periodic in one direction. In the other direction is constant outside of an interval. See the picture for example. This is a benchmark problem. The wavenumber is constant in each region. This problem arises in the study of waves traveling in a periodic medium.
+
+Slide 2
+In many applications it is required to compute a particular class of solutions, called Bloch solutions, that can be written as product of an exponential funzion in z and a periodic function in z. The complex number lambda is called mode or eigenvalue. If we substitute this function in the Helmholtz equation, we get the following PDE-eigenvalue problem. Due to periodicity we can solve the problem in a strip and extend the solution by periodicity. In the applications the computation of the eigenvalues with negative real part and close to the immaginary axis is required. The problem is still formulated in an infinite domain, but we know that the wavenumber is constant before x- and aftet x+. We can use this information to formulate an equivalent problem on a finite domain.
+
+Slide 3
+The following problem is equivalent to the PDE-eigenvalue problem in the strip. The boundary conditions that we just set depend in a nonlinear way on lambda. If we discretize this problem we have the following discrete problem. In practice we have a matrix that depends on lambda, we want to find for witch values of lambda the matrix became singular.
+
+Slide 4
+The problem that we just instroduced lies in a general class of problems called nonlinear eigenvalue problem. Such problems are defined in the following way. We have a matrix that depends on a parameter lambda, we want to find for witch paramenter the matrix become singular and eventually the nullspace. We assume that M depends in a nonlinear way on lambda and that is an analytic function of lambda. Such problems arises in many fields like quantum chemestry, wave propagation, vibration analisis... and is a very well studied problem. 
+
+Slide 5
+One method for solving the nonlinear eigenvalue problem is the infinite Arnoldi algorithm.  This algorithm is equivalent to the classic Arnoldi algorithm applied to a companion matrix. It is also equivalent to the Arnoldi algorithm applied in continuous settings to an operator B. Therefore this method inherits the properties of classical Arnoldi algorithm. In order to use this algorithm we need to be able to compute the derivatives of M. Moreover the dominating part of the algorithm is the orthogonalization.
+
+Slide 6
+It is well know that the Arnoldi algorithm builds an orthonormal basis of the Krylov space. In our setting such basis has a particular structure. In particular can be partitioned in block rows and the k-th vector has k nonzero block rows. The generation of the next vector of the Krylov space is done in the following way: the dashed lines indicates linear combinations. After the orthogonalization we get ... It is clear that the basis matrix can be generated using just the first block row. In particular we can consider an orthonormal basis Z of the first block row, using Z we can generate the whole basis matrix. The coefficients that allow us to generate the basis matrix from Z are stored in a tensor. Therefore the basis matrix can be implicitly stored with a small tensor and a small matrix.
+
+Slide 7
+The idea behind tensor infinite Arnoldi is to reformulate the infinite Arnoldi algorithm using the implicit representation of the basis matrix. The main advantage is the memory requirements. Moreover, since tensor infinite Arnoldi uses less datas it is in practice much faster due to modern CPU-caching issues.
+
+Slide 8
+Lets see in detail the structure of the waveguide eigenvalue problem. Q and C_1 are sparse and depends quadractically in lambda. P is diagonal and depends in a nonlinear way on lambda. Moreover P has branch-points singularities in the imaginary axis, close to the eigenvalues of interest. P is very small block. The action of the matrix R can be computed with an FFT. With a Cayley transformation the singularities move in the unit circle and the eigenvalues of interest inside the unitary disk.
+
+Slide 9
+For this problem there is closed form for the derivatives. Moreover high order derivatives has just a small number of nonzero elements. In practice we can exploit the structure to speedup the algorithm.
+
+Slide 10
+Here there is a difficult waveguide with one of the eigenfunctions of interest.
+
+Slide 11
+Here instead the convergence history. Notice that there is linear convergence like for the classic Arnoldi algoritm. Tensor infinite Arnoldi require in practice much less memrory and time and can solve bigger problems than infinite Arnoldi.
+
+Slide 12
+

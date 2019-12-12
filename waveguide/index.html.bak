@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>Teaching</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style> </head>
+  <body class="w3-light-grey">
+    <div class="w3-container">
+      <p> </p>
+      <h2 class="w3-text-teal"> <font color="black"> I am teaching assistant in
+          various courses. I organize exercise sessions, help students to solve
+          computer laboratory assignments and grade homework/exams. For more
+          information about old courses check the <a href="Teaching_old.html">previous
+            page</a>. </font> </h2>
+      <h1 class="w3-text-grey w3-padding-16">
+        <center> <a href="generate_the%20_waveguide_eigenproblem.zip">Matlab
+            function that generates the matrices of the waveguide problem </a></center>
+      </h1>
+      <p></p>
+      <h2 class="w3-text-teal">
+        <center> Note: the computation of the matrices may require a few
+          minutes. </center>
+      </h2>
+    </div>
+    <h1 class="w3-text-grey w3-padding-16">
+      <center> <a href="tiar.m">Matlab function based on the Tensor Infinite
+          Arnoldi (TIAR) method for solving the nonlinear eigenvalue problem </a></center>
+    </h1>
+  </body>
+</html>

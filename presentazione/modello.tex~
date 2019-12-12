@@ -1,0 +1,567 @@
+\documentclass[intlimits]{beamer}
+
+\mode<presentation>
+{
+  \usetheme{CambridgeUS}
+%  \usetheme{Frankfurt}
+  \usecolortheme{seahorse}
+  \usecolortheme{rose}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{itemize item}[triangle]
+
+  \setbeamertemplate{bibliography item}[book]
+
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{footline}
+  {
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.666666\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right] 
+        {date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+        \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+    \vskip0pt%
+  }
+}
+
+
+
+% utf8 font & italian support
+\usepackage[italian]{babel}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+%\usepackage{dsfont}
+\usepackage{mathrsfs}
+
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+  \newtheorem{teor}{Teorema}[section]
+  \newtheorem{prop}[teor]{Proposizione}
+  \newtheorem{cor}[teor]{Corollario}
+\theoremstyle{definition}
+  \newtheorem{defin}[teor]{Definizione}
+\theoremstyle{remark}
+  \newtheorem{esempio}[teor]{Esempio}
+  \newtheorem{esercizio}[teor]{Esercizio}
+  \newtheorem{oss}[teor]{Osservazione}
+  \newtheorem{prob}[teor]{Problema}
+
+\newcommand{\gra}[1]{\left\{#1\right\}}
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\ang}[1]{\left<#1\right>}
+\newcommand{\qua}[1]{\left[#1\right]}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normp}[1]{\norm{#1}_{p}}
+
+%\renewcommand{\mathbb}{\mathds}
+
+
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Lp}{L^p(\Omega)}
+\newcommand{\D}{\mathscr D}
+
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\x}{\mb x}
+\newcommand{\ud}{\,\mathrm{d}}
+\newcommand{\dx}{\ud\mb x}
+
+\newcommand{\dotcup}{\ensuremath{\overset\circ\cup}}
+
+\newcommand{\tc}{\ \textrm{:} \ }
+\newcommand{\qo}{\quad \textrm{q.o.} \ }
+\newcommand{\du}[1]{#1^\star}
+
+\renewcommand{\leq}{\leqslant} 
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\le}{\leqslant} 
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\diver}{div}
+
+\title[Dim. Hausdorff e Ins. Furstenberg]
+{Dimensione di Hausdorff\\ e Insiemi di Furstenberg}
+\subtitle{Tesi di Laurea Triennale}
+
+\author{Andrea Rossi}
+\institute{Università di Pisa}
+\date{30 settembre 2011}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{university-logo}{../cherubino}
+\logo{\pgfuseimage{university-logo}}
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\section{Presentazione}
+\begin{frame}{Indice.}
+  \begin{itemize}[<+->]
+    \item Presenteremo le definizioni classiche di:
+      \begin{itemize}[<+->]
+        \item Misure di Hausdorff.
+        \item Dimensione di Hausdorff.
+        \item Insieme di Furstenberg.
+        \end{itemize}
+    \item
+      Estenderemo in modo opportuno il concetto di misure di Hausdorff.
+    \item
+      Mostreremo un insieme \textit{a-dimensionale} rispetto a queste misure di Hausdorff estese.
+    \item
+      Definiremo gli insiemi di Furstenberg generalizzati.
+    \item
+      Enunceremo due teoremi sugli insiemi di Furstenberg generalizzati.
+    \item
+      Come corollario otterremo un risultato importante per quanto riguarda
+      la dimensione di un insieme di Furstenberg classico.
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Introduzione}
+\begin{frame}{Misure esterne di Hausdorff $H_p^*$.}
+\begin{defin}
+Se $E \subseteq \mathbb{R}^N$, il \emph{diametro} di $E$ è il numero 
+non negativo (eventualmente infinito)
+  \[ diam\ E = \begin{cases}
+    0 & \text{se $E = \emptyset$}\\
+    \sup \gra{\abs{x- y} : x, y \in E} & \text{altrimenti}
+.\end{cases}\]
+\end{defin}
+\pause
+\begin{defin}
+Sia $E \subseteq \mathbb{R}^N$, e siano $p,\,\delta \ge 0$. Definiamo
+  \[ H^{*}_{p,\delta}(E) = \inf\gra{ \sum_{n \in \mathbb{N}}\pa{diam\ U_n}^p : U_n\ \text{aperti},\, diam\ {U_n} < \delta,\, E \subseteq \bigcup_{n \in \mathbb{N}}U_n}. \]
+\pause
+Sia $p > 0$, la \emph{misura esterna p-dimensionale di Hausdorff} $H^{*}_p$ è data da
+\[ H^{*}_p(E) = \lim_{\delta\to0^+}H^{*}_{p,\delta}(E) = \sup_{\delta > 0}H^{*}_{p,\delta}(E)\   
+\qquad   \forall E\subseteq \mathbb{R}^N.\]  
+\end{defin}
+\end{frame}
+
+
+\begin{frame}{Proprietà delle misure esterne $H_p^*$.}
+\begin{prop} Sia $p > 0$, allora: \pause
+\begin{enumerate} 
+\item  $H^{*}_p(E) \geq 0     \qquad \forall E\subseteq \mathbb{R}^N$; \pause
+\item  $H^{*}_p(\emptyset) = H^{*}_p(\gra{x}) = 0  \qquad        \forall x\in \mathbb{R}^N$; \pause
+\item $H^{*}_p$ è monotona e numerabilmente subadditiva;\pause
+\item $H^{*}_p(E+x)=H^{*}_p(E)\qquad\forall x\in\mathbb{R}^N,\ \forall E \subseteq\mathbb{R}^N$;\pause
+\item  $H^{*}_p(tE)= t^p H^{*}_p(E)\qquad\forall t>0,\ \forall E \subseteq\mathbb{R}^N$.
+\end{enumerate}
+\end{prop}  
+\end{frame}
+
+
+\begin{frame}{Misure di Hausdorff $H_p$.}
+\begin{defin} La classe degli insiemi $H_p$-misurabili è 
+\[M_H = \gra{E\subseteq \mathbb{R}^N\ :\ H^{*}_p(A) = H^{*}_p(A\cap E) + H^{*}_p(A\cap E^c)   
+\qquad  \forall A\subseteq \mathbb{R}^N}.\] 
+\end{defin}
+\pause
+\begin{defin} La misura di Hausdorff di indice $p$ è   $H_p =  H^{*}_p \vert_{M_H}$ .
+\end{defin}
+\pause
+Si verifica che $M_H$ è una tribù e che $H_p$ è numerabilmente additiva sugli 
+elementi disgiunti di $M_H$, quindi $H_p$ è effettivamente una misura.
+\begin{prop} Per ogni $p > 0$,  si ha $B(\mathbb{R}^N) \subset M_H$,
+ovvero i boreliani sono $H_p$-misurabili. \end{prop}
+\end{frame}
+
+
+\begin{frame}{Dimensione di Hausdorff}
+Fissato $E \subseteq \mathbb{R}^N$, studiamo la misura esterna $H^{*}_p(E)$ al variare di $p > 0$.
+\pause
+\begin{prop} Per ogni $E\subseteq \mathbb{R}^N$ e per ogni $\epsilon$ positivo 
+\[H^{*}_{N+\epsilon}(E)=0.\] \end{prop} 
+Consideriamo quindi $H^{*}_p(E)$ limitandoci ai valori $p \in (0,N]$.
+\pause
+\begin{prop} Sia $E\subseteq \mathbb{R}^N$ e sia $p \in ]0,N]$: \\
+\[\text{(i) se } H^{*}_p(E) < \infty  \quad \text{allora} \quad H^{*}_q(E) = 0   \qquad  \forall\ q \in\ ]p,N]; \]  
+\[\text{(ii) se } H^{*}_p(E) > 0  \quad \text{allora} \quad H^{*}_q(E) = \infty  \qquad  \forall\ q \in\ ]0,p[.\]\end{prop}
+\end{frame}
+\begin{frame}{Dimensione di Hausdorff}
+\begin{cor} Sia $E\subseteq \mathbb{R}^N$ tale che $H^{*}_p(E)$ non sia identicamente nulla per ogni $p > 0$, allora 
+esiste $p_0 \in ]0,N]$ tale che \\
+\[ H^{*}_p(E) = \begin{cases}
+    \infty & \text{se $0 < p < p_0$ }\\
+    \in [0,\infty] & \text{se $p = p_0$ }\\
+    0 & \text{se $ p > p_0  $}
+\end{cases}\]
+\end{cor}
+In particolare per ogni $E\subseteq \mathbb{R}^N$ la funzione $p\longmapsto H^{*}_p(E)$ risulta decrescente in $p$.
+Di conseguenza possiamo introdurre il prossimo concetto. \\
+\pause
+\begin{defin} Si dice dimensione di Hausdorff di un sottoinsieme $E$ di $\mathbb{R}^N$, il numero
+\[dim_H(E) = \inf\gra{p > 0:\ H^{*}_p(E) = 0}\ \in\ [0,N].\]
+\end{defin}
+\end{frame}
+\begin{frame}{Dimensione di Hausdorff}
+\begin{oss} Notiamo che il concetto di dimensione di Hausdorff vale per ogni $E\subseteq \mathbb{R}^N$, 
+anche non misurabile, perché la definizione si basa sul concetto di misura esterna di Hausdorff, 
+definita per ogni $E$. \\
+Come da intuito, la dimensione di Hausdorff è monotona, ovvero $E\subset F$ implica $dim_H(E)\leq dim_H(F):$
+questo deriva dal fatto che $H^{*}_p$ è monotona.\\
+\pause
+In pratica per dimostrare che un insieme dato $E$ ha una certa dimensione di Hausdorff $s$ è sufficiente
+verificare che 
+\[H^{*}_r(E) = \infty \qquad \forall r < s  \qquad \text{e} \qquad H^{*}_t(E) = 0 \qquad \forall t > s,\]
+indipendentemente dal fatto che $H^{*}_s(E)$ sia nulla, finita positiva o infinita.
+In particolare se $0<H^{*}_s(E)<\infty$ allora $dim_H(E)=s.$\\
+\end{oss}
+\end{frame}
+
+
+\begin{frame}{Il rapporto tra la misura di Hausdorff e quella di Lebesgue}
+Dopo aver introdotto la dimensione di Hausdorff, mostreremo ora come essa caratterizza gli insiemi
+non trascurabili rispetto a $m_N$, ovvero quelli con misura di Lebesgue strettamente positiva.
+\pause
+\begin{teor} Esiste una costante $\alpha_N$, che dipende solo da $N$, 
+tale che per ogni insieme $E\subseteq \mathbb{R}^N$ si ha
+\[ H^{*}_N(E) = \alpha_N m^{*}_N(E).\]
+\end{teor}
+\pause
+\begin{cor} Sia $E\subseteq \mathbb{R}^N$ tale che $m^{*}_N(E) > 0$, allora
+\[dim_H(E) = N .\] 
+\end{cor}
+\end{frame}
+
+
+\begin{frame}{Esempi}
+In seguito al corollario limiteremo la nostra attenzione alla dimensione di Hausdorff degli insiemi di misura nulla 
+secondo Lebesgue, e vedremo con alcuni esempi come tale dimensione riesca a "catalogare" e distinguere questi insiemi:
+\pause
+\begin{itemize}[<+->]
+  \item sia $M \subset \mathbb{R}^N$ tale che $m^*_N(M)>0$, allora $M$ ha dimensione $N$;
+  \item ogni insieme numerabile $E \subset \mathbb{R}^N$ ha dimensione 0;
+  \item il supporto $\Gamma=\varphi([a,b])\subset \mathbb{R}^N$ di ogni curva semplice di classe $C^1$ ha dimensione 1;
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Un esempio di dimensione non intera: l'insieme di Cantor}
+Sia $C\subset \mathbb{R}$ l'insieme di Cantor ottenuto togliendo da $[0,1]$ al primo passo
+l'intervallo (aperto) centrale di ampiezza $1/3$, e ricorsivamente al $k$-esimo passo togliendo da ogni 
+sottointervallo residuo l'intervallo (aperto) centrale di ampiezza $(1/3)^k$.
+\begin{figure}
+  \includegraphics[width=3in]{cantor}
+  \caption{I primi cinque passi dell'iterazione.}  
+\end{figure}
+\pause
+\begin{prop} L'insieme di Cantor ha dimensione $\frac{\log 2}{\log 3}$.\end{prop}
+\end{frame} 
+
+
+\begin{frame}{Insiemi di Furstenberg}
+Presentiamo adesso una classe di particolari sottoinsiemi del
+piano euclideo, la cui definizione si basa sul concetto di dimensione
+di Hausdorff.
+\pause
+\bigskip
+\begin{defin} Sia $\alpha \in ]0,1]$,
+un sottoinsieme $E\subseteq \mathbb{R}^2$ si dice insieme di Furstenberg di 
+tipo $\alpha$ (oppure insieme $F_\alpha$) se, per ogni direzione $e$ 
+nel cerchio unitario, esiste un segmento $l_e$ nella direzione di $e$ tale che
+$dim_H(l_e \cap E) \geq \alpha$. Diremo anche che in tal caso $E$ appartiene alla classe $F_\alpha$.\end{defin}
+\end{frame}
+
+
+
+
+
+\section{Estensione alle misure $H^h$}
+\begin{frame}{Funzioni dimensione}
+\begin{defin} Una funzione $h : [0,\infty) \longrightarrow [0,\infty)$ è chiamata funzione dimensione se
+\[h(0) = 0,\ h(t)>0 \text{ per } t > 0,\ h \text{ è crescente e continua a destra.}\]
+Denotiamo con $\mathbb{H}$ la classe delle funzioni dimensione.
+\end{defin}
+\pause
+\begin{defin} Siano $g,h$ due funzioni dimensione. Diremo che $g$ è dimensionalmente più piccola
+di $h$ e scriveremo $g \prec h$ se e solo se 
+\[\lim_{x\to 0^+} \dfrac{h(x)}{g(x)} = 0 \]
+\end{defin}
+\end{frame}
+
+
+\begin{frame}{Estensione}
+Possiamo ora definire le misure esterne di Hausdorff $H^h$, dove $h \in \mathbb{H}$, analogamente al caso classico.
+\bigskip
+\begin{defin} Siano $E \subseteq \mathbb{R}^N$, $\delta > 0$ e $h$ una funzione dimensione. Definiamo
+  \[ H^h_\delta(E) = \inf\gra{ \sum_{n \in \mathbb{N}}h(diam\ U_n): U_n\ 
+  \text{aperti},\, diam\ {U_n} < \delta,\, E \subseteq \bigcup_{n \in \mathbb{N}}U_n} .\]
+\pause
+La misura esterna $h$-dimensionale di Hausdorff di $E \subseteq \mathbb{R}^N$ è
+\[ H^h(E) = \lim_{\delta\to0^+}H^{h}_{\delta}(E) = \sup_{\delta > 0}H^{h}_{\delta}(E).\]\end{defin}
+\end{frame}
+
+
+\begin{frame}{Estensione}
+\begin{oss} Notiamo come si tratti effettivamente di un'estensione delle definizioni precedenti,
+nel senso che la definizione usuale di misura esterna di Hausdorff 
+$H^{*}_p ( p > 0 )$ si ottiene per $h_p(x) = x^p$, che è proprio una funzione dimensione.
+Analogamente per ogni $E\subseteq \mathbb{R}^N$ la funzione $h\longmapsto H^h(E)$ risulta "decrescente" in $h$,
+ovvero se $g \prec h$ allora $H^h(E)\leq H^g(E)$.\end{oss}
+\pause
+Come vedremo, non è vero in generale che, dato un insieme $E$, esista una funzione $h \in \mathbb{H}$ tale che\\
+\[ H^{g}(E) = \begin{cases}
+    \infty & \text{se $g \prec h$ }\\
+    0 & \text{se $ g\succ h$}
+\end{cases}\]\\
+\pause
+ovvero con questa estensione alle misure $H^h$ perdiamo l'analogo della dimensione di Hausdorff,
+che invece esiste per ogni insieme $E$ nella definizione standard.
+\end{frame}
+
+
+\begin{frame}{I risultati di Besicovitch}
+\begin{teor} Sia $h \in \mathbb{H}$ tale che $H^{h}(E) = 0$, allora
+\[ \exists\ g \prec h \ (g \in \mathbb{H}): \quad H^{g}(E) = 0.\]
+\end{teor}
+\bigskip
+\pause
+\begin{teor} Sia $E \subset \mathbb{R}^N$ un insieme boreliano. Se $h \in \mathbb{H}$ è tale 
+che $E$ ha misura $H^h$ non $\sigma$-finita allora esiste
+$g \succ h \ (g \in \mathbb{H})$ tale che $E$ ha misura $H^g$ non $\sigma$-finita.
+\end{teor}
+\end{frame}
+
+
+\begin{frame}{I risultati di Besicovitch}
+\begin{cor} Se per un boreliano $E \subset \mathbb{R^N}$ esiste $h \in \mathbb{H}$ tale che
+\[H^g(E) > 0 \quad \forall g \prec h, \qquad \qquad H^g(E) = 0 \quad \forall g \succ h,\]
+allora $E$ ha misura $H^h$ positiva e $\sigma$-finita.\end{cor}
+\pause
+\begin{defin} Se $E$ è un boreliano che verifica le ipotesi del corollario, esso si dice $h$-set; 
+viceversa, se per ogni $h \in \mathbb{H} \ \ E$ non è un $h$-set,  $E$ si dice \textit{a-dimensionale}. \end{defin} 
+\pause Il corollario è importante in quanto ci permetterà di mostrare
+un esempio di insieme a-dimensionale: l'insieme dei numeri di Liouville.
+\end{frame}
+
+
+\begin{frame}{I numeri di Liouville}
+\begin{defin} Chiamiamo insieme dei numeri di Liouville
+\[ \mathbb{L} = \gra{x \in \mathbb{R}: \quad\forall n \in \mathbb{N}_0,\ \exists\ p,q \in \mathbb{Z} \ (q \geq 2):
+\quad 0 < \abs{x - \frac{p}{q}} < \frac{1}{q^n}}.\]\end{defin}
+\pause
+\begin{prop} L'insieme $\mathbb{L}$ ha le seguenti proprietà:
+\pause
+\begin{enumerate}
+\item $\emptyset \neq \mathbb{L} \subset \mathbb{Q}^c$, cioè i numeri di Liouville sono irrazionali; \pause
+\item  $\mathbb{L}$ è un insieme $G_\delta$, quindi boreliano;\pause
+\item $\mathbb{L}$ è denso in $\mathbb{R}$;\pause
+\item  $\mathbb{L}$ ha misura $m$ di Lebesgue nulla; \pause
+\item   $\mathbb{L}$ è periodico $mod\ \mathbb{Q}: \quad  \mathbb{L} + q = \mathbb{L}  \quad \forall\ q \in \mathbb{Q}$.  
+\end{enumerate}
+\end{prop}
+\end{frame}
+
+
+\begin{frame}{Misure di Borel su $\mathbb{R}$}
+Per mostrare che $\mathbb{L}$ è un insieme a-dimensionale, dobbiamo utilizzare delle
+interessanti proprietà di cui godono le misure di Borel su $\mathbb{R}$.\\
+\bigskip
+\pause
+Indichiamo con $int(A)$ la parte interna dell'insieme $A$, 
+definiamo $A+B =\gra{ a+b: a \in A, \quad b \in B}, \quad A+t=\gra{ a+t:a \in A}$.\pause
+\begin{teor}Sia $B\subset \mathbb{R}$ un boreliano di misura di Lebesgue nulla e $\mu$ una misura boreliana 
+(cioè definita su una tribù contenente i boreliani) su $\mathbb{R}$ tale che $B$ abbia misura $\mu$ positiva e $\sigma$-finita. 
+\pause Allora
+esiste un compatto $C \subset B \quad$ con $\mu(C)>0$ e $int(C-C)=\emptyset$.\end{teor}\pause
+\begin{teor}Sia $B$ un insieme $G_\delta$ denso tale che $\gra{t \in \mathbb{R}: B+t \subset B}$ sia denso in $\mathbb{R}$
+e sia $C \subset B$ un compatto con $int(C-C)=\emptyset$. \pause Allora  $B$ contiene una quantità più 
+che numerabile di traslati disgiunti di $C$.\end{teor}
+\end{frame}
+
+
+\begin{frame}{Misure di Borel su $\mathbb{R}$}
+Grazie ai due teoremi appena enunciati otteniamo
+\begin{teor}Sia $B\subset \mathbb{R}$ un insieme (non vuoto) $G_\delta$ di misura di Lebesgue nulla,
+e supponiamo che $\gra{t \in \mathbb{R}: B+t \subset B}$ sia denso in $\mathbb{R}$. \pause Allora per ogni misura 
+$\mu$ boreliana su $\mathbb{R}$ e invariante per traslazioni si ha \pause o $\mu(B)=0$ 
+oppure $B$ ha misura $\mu$ non $\sigma$-finita.\end{teor}
+\bigskip
+\pause
+\begin{cor}$\mathbb{L}$ è un insieme a-dimensionale.\end{cor}
+\end{frame}
+
+
+
+
+
+\section{Insiemi di Furstenberg generalizzati}
+\begin{frame}{Insiemi di Furstenberg generalizzati}
+\begin{defin} Sia $h \in \mathbb{H}$, un sottoinsieme $E\subseteq \mathbb{R}^2$ si dice \textit{insieme di Furstenberg di 
+tipo $h$}, o insieme $F_h$, se per ogni direzione $e \in \mathbb{S}^1$ esiste un segmento $l_e$ nella 
+direzione di $e$ tale che $H^h(l_e \cap E) >0$.\end{defin}
+\end{frame}
+
+
+\begin{frame}{Insiemi di Furstenberg generalizzati}
+\begin{defin} \[\mathbb{H}_d = \gra{h \in \mathbb{H}: \ h(2x)\leq Ch(x) \ \text{ per qualche } C>0}.\] \end{defin}\pause
+\begin{defin} Date due funzioni $g,h \in \mathbb{H}$ definiamo
+\[ \Delta_0(g,h)(x)=\frac{g(x)}{h(x)}, \qquad \Delta_1(g,h)(x)=\frac{g(x)}{h^2(x)}.\] \end{defin}
+\end{frame}
+
+
+\begin{frame}{Condizioni sufficienti affinché $H^g(F_h)>0$}
+\begin{teor} Siano $E$ un insieme $F_h$ con $h \in \mathbb{H}_d$, $g \in \mathbb{H}$ tale che $g \prec h^2$. \pause Posto
+\[a_k= \sqrt{\frac{k}{\Delta_1(g,h)(2^{-k})}},\] supponiamo che la serie $\sum_{k=0}^\infty a_k$ converga. \pause
+ Allora \[H^g(E)>0.\]
+\end{teor}
+\end{frame}
+
+
+\begin{frame}{Condizioni sufficienti affinché $H^g(F_h)>0$}
+\begin{teor} Sia $E$ un insieme $F_h$, con $h \in \mathbb{H}_d$, tale che $h(x) \lesssim x^\alpha$ per qualche 
+$0< \alpha <1$, e sia $g \in \mathbb{H}$ tale che $g \prec h$. \pause 
+  Posto \[a_k= (\Delta_0(h,g)(2^{-k}))^{\frac{2\alpha}{2\alpha+1}},\] 
+se la serie $\sum_{k=0}^\infty a_k$ converge, \pause
+allora \[H^{g \sqrt{\cdot}}(E)>0. \]
+\end{teor}
+\end{frame}
+
+
+\begin{frame}{Il caso degli insiemi di Furstenberg classici}
+Riprendiamo la definizione di insieme di Furstenberg classico.\\
+\begin{defin}Sia $\alpha \in ]0,1]$, un sottoinsieme $E\subseteq \mathbb{R}^2$ si dice insieme di Furstenberg di 
+tipo $\alpha$ (oppure insieme $F_\alpha$) se, per ogni direzione $e$ 
+nel cerchio unitario, esiste un segmento $l_e$ nella direzione di $e$ tale che
+$dim_H(l_e \cap E) \geq \alpha$. Diremo anche che in tal caso $E$ appartiene alla classe $F_\alpha$.\end{defin}
+\pause \begin{oss}
+Un insieme di Furstenberg classico di tipo $F_\alpha$ con $\alpha \in \ ]0,1]$ non è altro che un 
+caso particolare di insieme di Furstenberg generalizzato
+di tipo $F_h$, con $h(x)= x^\alpha$. \end{oss}
+\end{frame}
+
+
+\begin{frame}{Il teorema di Wolff}
+Useremo i due importanti teoremi sugli insiemi di Furstenberg generalizzati per dare un risultato notevole,
+dovuto a Wolff, per quanto riguarda la dimensione di Hausdorff di un insieme del tipo $F_\alpha$.\pause
+\bigskip
+\begin{teor}[Wolff] Dato $\alpha \in ]0,1]$, sia $E \in F_\alpha$. \pause Allora
+\[dim_H(E) \geq \max\gra{2\alpha,\alpha + 1/2}.\] \end{teor}
+\end{frame}
+
+
+\begin{frame}{Un'applicazione del teorema di Wolff}
+Applichiamo infine il teorema di Wolff per stimare la
+dimensione di un opportuno insieme di Furstenberg che andiamo a costruire:\pause
+\begin{esempio} Consideriamo il classico insieme di Cantor $C\subset \mathbb{R}$,
+e sia $C^{'}= C- 1/2 \subset [-1/2, 1/2]$ il suo traslato verso sinistra di $1/2$. \pause
+ Definiamo  \[\mathcal{W}=\gra{(x,y):\ x=r\cos\theta,\ y=r\sin\theta,\ r \in C^{'},\ \theta \in [0,\pi]}\subset \mathbb{R}^2.\] \pause
+$\mathcal{W}$ contiene in ogni direzione un insieme di Cantor, \pause
+quindi $\mathcal{W}$ è un insieme di Furstenberg $F_\alpha$ dove $\alpha=\frac{\log 2}{\log 3}$. \pause
+Allora per il teorema di Wolff si ha
+\[dim_H(\mathcal{W}) \geq \max\gra{2\alpha,\alpha+ \frac{1}{2}} = \max\gra{\frac{2\log 2}{\log 3},
+\frac{\log 2}{\log 3}+ \frac{1}{2}} = \frac{\log 4}{\log 3}.\]
+\end{esempio}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Conclusioni}
+\end{frame}
+
+
+
+
+
+% All of the following is optional and typically not needed. 
+\appendix
+\section<presentation>*{\appendixname}
+\subsection<presentation>*{Bibliografia essenziale}
+%\begin{frame}[allowframebreaks]
+\begin{frame}
+  \frametitle<presentation>{Bibliografia essenziale}
+  \begin{thebibliography}
+    \beamertemplatebookbibitems
+  % Start with overview books.
+\bibitem{Acq}
+     Paolo Acquistapace.
+    \newblock {\em Appunti di Analisi Funzionale}.
+    \newblock http://www.dm.unipi.it/$\sim$acquistp/anafun.pdf .
+\bibitem{Bes} 
+    A. S. Besicovitch.
+    \newblock {\em On the definitions of tangents to sets of infinite linear measure}.
+    \newblock Proc. Camb. Phil. Soc. 52 (1956) 2029.
+\bibitem{El-Ke}
+    Marton Elekes e Tamas Keleti.
+    \newblock {\em Borel sets which are null or non-$\sigma$-finite for
+               every translation invariant measure}.
+    \newblock Adv. Math. 201 (2006) 102-115.
+\bibitem{Mo-Re2}  
+    Ursula Molter e Ezequiel Rela.
+    \newblock {\em Improving dimension estimates for Furstenberg-type sets}.
+    \newblock Adv. Math. 223 (2010) 672-688.
+  \end{thebibliography}
+\end{frame}
+\begin{frame}
+  \frametitle<presentation>{Bibliografia essenziale}
+  \begin{thebibliography}
+    \beamertemplatebookbibitems
+  % Start with overview books.
+\bibitem{Rog}
+    C. A. Rogers.
+    \newblock {\em Hausdorff measures}.
+    \newblock Cambridge University Press, 1970.
+\bibitem{Vio}  
+    Carlo Viola.
+    \newblock {\em Approssimazione diofantea, frazioni continue e misure d'irrazionalità}.
+    \newblock La Matematica nella Societ\`a e nella Cultura, Boll. Un. Mat. Ital. (8) 7-A, agosto 2004.
+\bibitem{Wol}
+    Thomas Wolff.
+    \newblock {\em Recent work connected with the Kakeya problem}.
+    \newblock Prospects in mathematics (Princeton, NJ, 1996), 129162, Amer. Math. Soc., Providence, RI, 1999.
+  \end{thebibliography}
+\end{frame}
+
+
+
+
+
+
+\end{document}

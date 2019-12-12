@@ -1,0 +1,56 @@
+\documentclass[helvetica,notitle,nologo]{europecv}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\ecvname{Mele, Giampaolo}
+\ecvnationality{Italian}
+\ecvdateofbirth{April 3, 1989}
+\ecvemail{mele@mail.dm.unipi.it}
+\ecvbeforepicture{\raggedright}
+\ecvpicture[height=4cm]{avatar}
+\begin{document}
+\begin{europecv}
+
+\ecvpersonalinfo
+
+\ecvsection[1cm]{Education}
+
+\ecvitem[0.5cm]{Secondary School}{Obtained the Maturita' scientifica on 2008 from Liceo scientifico ``Dante Alighieri''}
+
+\ecvitem[0.5cm]{University}{Graduated on the 30/09/2011 with a bachelor's degree (laurea triennale) in 
+mathematics from University of Pisa with 105/110 discussing the thesis: 
+``Numerical method for delay differential equations'', supervisor: D.A. Bini}
+
+\ecvitem[0.5cm]{Others}{Participant of ``Rome-Moscow school of Matrix Methods and Applied Linear Algebra 2012'', exams taken:
+\begin{itemize}
+ \item Iterative methods for large sparse structured linear systems
+ \item Displacement decompositions, matrix algebras, triangular Toeplitz matrices, Bernoulli numbers
+ \item  Applied spectral graph analysis
+\end{itemize}
+}
+
+
+\ecvsection[1cm]{Main interests}
+\ecvitem[0.5cm]{Graph theory}{Application of graph theory in social networks, spectral graph theory,  fast diameter estimation, 
+fast estimation of Fiedler vector}
+\ecvitem[0.5cm]{Numerical linear algebra}{Structured linear systems, computation of sparse matrices and their applications}
+\ecvitem[0.5cm]{Physical mathematics}{Numerical methods in physical mathematics and orbit determination}
+\ecvitem[0.5cm]{Other}{Numerical method for differential problems in particular Stiff problems, Facebook graph computation, Google matrix computation}
+
+
+
+\ecvsection[1cm]{Languages}
+\ecvitem[0.5cm]{Italian}{Mother tongue}
+\ecvitem[0.5cm]{English}{Fluent written and spoken}
+
+\ecvsection[1cm]{Computer skills}
+\ecvitem[0.5cm]{Operating systems}{Good knowledge of GNU/Linux and Windows}
+\ecvitem[0.5cm]{Programming}{Good knowledge of C, C++, matlab, FORTRAN and working knowledge of python}
+\ecvitem[0.5cm]{Other}{Goog knowledge of \ \LaTeX \ and basic HTML}
+
+\ecvsection{Other information}
+\ecvitem[0.5cm]{Homepage}{http://poisson.phc.unipi.it/$ \ \displaystyle {}_{\displaystyle \tilde{}} \ $mele/}
+\ecvitem[0.5cm]{Sport played}{Swimming and football}
+\ecvitem[0.5cm]{Interests}{Reading detective stories, playing bass guitar and watching science fictions}
+\ecvitem[0.5cm]{Short description of myself}{I am a very sociable person and I like work in group and listen the other people ideas}
+\end{europecv}
+\end{document}

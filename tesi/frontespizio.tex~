@@ -1,0 +1,57 @@
+\begin{titlepage}
+
+
+\begin{center}
+
+
+\vspace{3cm}
+\includegraphics[width=3cm]{immagini/cherubino.pdf}
+\vspace{1cm}
+
+
+\textsc{\Huge Universit\`a degli Studi di Pisa\\}
+
+
+\vspace{0.3cm}
+
+\line(1,0){400}
+\vspace{0.3cm}\\
+\Large{
+Facoltà di Scienze Matematiche, Fisiche e Naturali	\\ [0.3cm]
+Corso di laurea triennale in Matematica
+}
+
+
+\vspace{3cm}
+
+\Large{ Tesi di Laurea }
+
+{
+\Huge
+\textbf{
+	  Metodi numerici per equazioni	\\ [0.5cm] 
+	  differenziali con ritardo
+	  }
+}
+
+
+
+\end{center}
+
+\vspace{2cm}
+\begin{minipage}{5cm}
+\centering {\large Relatore}\\ \vspace{-0.0cm} \textbf{{\large Prof. Dario A. Bini}}
+\end{minipage}
+\hspace{3cm}
+\begin{minipage}{5cm}
+\centering {\large Candidato}\\ \vspace{-0.0cm} \textbf{{\large Giampaolo Mele}} \\
+\end{minipage}
+
+\vspace{2.5cm}
+\begin{center}
+ \line(1,0){160}
+\vspace{0.3cm}\\
+ANNO ACCADEMICO 2010-2011
+\end{center}
+
+\end{titlepage}
